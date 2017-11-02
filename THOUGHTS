@@ -1,0 +1,14 @@
+login
+signup
+list games
+	|---> create game
+	|---> open game
+
+need global template
+
+redirect all urls to index.html
+create js app
+	|-> based on url,
+		|--> execute page module
+		|--> load data from api, if 403, load login page
+		|--> otherwise load template and display template
