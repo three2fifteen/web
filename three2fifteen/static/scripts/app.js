@@ -1,3 +1,3 @@
 loader.executeModule('main', function () {
-	console.log("hello world");
+	console.log(window.location);
 });
