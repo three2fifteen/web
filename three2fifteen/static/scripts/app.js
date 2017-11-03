@@ -1,3 +1,3 @@
-loader.executeModule('main', function () {
-	console.log(window.location);
+loader.executeModule('main', 'page', function (page) {
+	page.action();
 });
