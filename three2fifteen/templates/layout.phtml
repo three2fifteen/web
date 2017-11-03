@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Three 2 Fifteen</title>
+	</head>
+	<body>
+		{% block body %}{% endblock %}
+		<script type="text/javascript" src="https://ghislain-rodrigues.fr/js/butterfly.min.js"></script>
+		{% block scripts %}{% endblock %}
+		<script type="text/javascript" src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+	</body>
+</html>
