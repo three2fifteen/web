@@ -21,3 +21,12 @@ Install the server:
 	.. code-block::
 
 	$ three2fifteen-web
+
+WebViews
+========
+
+The HTML views are in:
+
+.. code-block::
+
+	three2fifteen/templates/
