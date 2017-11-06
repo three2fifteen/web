@@ -6,7 +6,7 @@ loader.addModule('request', () => {
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.onreadystatechange = (e) => {
 				if (e.target.readyState == 4) {
-					doneCallback(e.target.status, e.target.statusText, e.target.response)
+					doneCallback(e.target.status, e.target.response)
 				}
 			};
 			xhr.send(data);

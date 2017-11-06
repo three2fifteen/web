@@ -1,7 +1,7 @@
 loader.addModule('page',
 'auth', 'request', 'config', 'B',
 (auth, request, config, B) => {
-	function _loginResponseHandler(statusCode, statusReason, body) {
+	function _loginResponseHandler(statusCode, statusReason, body, dest_url) {
 		if (statusCode == 200) {
 			auth.login(JSON.parse(body).access_token);
 		}
