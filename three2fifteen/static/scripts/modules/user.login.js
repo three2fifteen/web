@@ -1,6 +1,11 @@
-loader.addModule('page', 'request', 'config', 'B', (request, config, B) => {
+loader.addModule('page',
+'auth', 'request', 'config', 'B',
+(auth, request, config, B) => {
 	function _loginResponseHandler(statusCode, statusReason, body) {
-		if (statusCode != 200) {
+		if (statusCode == 200) {
+			auth.login(JSON.parse(body).access_token);
+		}
+		else {
 			B.$id("form-message").innerHTML = JSON.parse(body).message;
 		}
 	}
