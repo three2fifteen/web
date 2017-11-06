@@ -2,6 +2,7 @@
 {% block body %}
 	<form id="login-form" method="POST" action="">
 		<div id="form-message"></div>
+		<input type="hidden" name="to" value="{{ to }}" />
 		<input type="text" name="username" placeholder="Username" />
 		<input type="password" name="password" placeholder="Password" />
 		<input type="submit" value="Log in" />
