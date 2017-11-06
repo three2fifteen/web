@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, Response, current_app
+from flask import Blueprint, request, render_template, Response, current_app
 from three2fifteen.controller.config import ConfigController
 
 
@@ -12,7 +12,9 @@ def index():
 
 @bp.route('/login')
 def login():
-    return render_template('login.phtml')
+    to = request.args.get('to')
+    to = to if to is not None else '/'
+    return render_template('login.phtml', to=to)
 
 
 @bp.route('/signup')

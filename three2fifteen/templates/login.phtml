@@ -1,6 +1,12 @@
 {% extends "layout.phtml" %}
 {% block body %}
-	Login
+	<form id="login-form" method="POST" action="">
+		<div id="form-message"></div>
+		<input type="hidden" name="to" value="{{ to }}" />
+		<input type="text" name="username" placeholder="Username" />
+		<input type="password" name="password" placeholder="Password" />
+		<input type="submit" value="Log in" />
+	</form>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/user.login.js') }}"></script>
