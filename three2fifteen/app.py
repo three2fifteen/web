@@ -2,7 +2,7 @@ import three2fifteen.factory
 
 
 def start_app():
-    three2fifteen.factory.create_app().run(port=5003)
+    three2fifteen.factory.create_app().run(port=5003, host='0.0.0.0')
 
 
 def main():
