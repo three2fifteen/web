@@ -1,6 +1,7 @@
 import logging
 from flask import Flask, current_app, abort
 from werkzeug.utils import find_modules, import_string
+import http.client as http_client
 
 
 def create_app():
@@ -14,6 +15,7 @@ def create_app():
     logging.info("starting server")
 
     register_blueprints(app)
+    register_logger()
 
     return app
 
@@ -28,3 +30,12 @@ def register_blueprints(app):
         if hasattr(mod, 'bp'):
             app.register_blueprint(mod.bp)
     return None
+
+
+def register_logger():
+    http_client.HTTPConnection.debuglevel = 1
+    logging.basicConfig()
+    logging.getLogger().setLevel(logging.DEBUG)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.DEBUG)
+    requests_log.propagate = True
