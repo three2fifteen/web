@@ -1,6 +1,11 @@
 {% extends "layout.phtml" %}
 {% block body %}
-	Signup
+	<form id="signup-form" method="POST" action="">
+		<div id="form-message"></div>
+		<input type="text" name="username" placeholder="Username" />
+		<input type="password" name="password" placeholder="Password" />
+		<input type="submit" value="Sign up" />
+	</form>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/user.signup.js') }}"></script>
