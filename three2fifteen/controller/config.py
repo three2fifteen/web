@@ -5,5 +5,6 @@ class ConfigController(object):
     def get(self):
         return {
             'api_host': self.config['API_HOST'],
-            'api_login': self.config['API_LOGIN']
+            'api_login': self.config['API_LOGIN'],
+            'api_signup': self.config['API_SIGNUP']
         }
