@@ -33,3 +33,24 @@ The HTML views are in:
 .. code-block::
 
 	three2fifteen/templates/
+
+Sass
+====
+
+To install sass in the project, run:
+
+.. code-block::
+
+	make sass-install
+
+To start the sass watch, run:
+
+.. code-block::
+
+	make sass-watch
+
+To manually compile the sass files in css, run:
+
+.. code-block::
+
+	make sass-run
