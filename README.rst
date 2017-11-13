@@ -54,3 +54,6 @@ To manually compile the sass files in css, run:
 .. code-block::
 
 	make sass-run
+
+The sass files are located in the folder ``three2fifteen/sass/`` and the css
+files are generated in the folder ``three2fifteen/static/stylesheets/``.
