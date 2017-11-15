@@ -1,7 +1,10 @@
 loader.addModule('request', () => {
-	function _request(method, url, data, doneCallback) {
+	function _request(method, url, data, headers, doneCallback) {
 		var xhr = new XMLHttpRequest();
 		xhr.open(method, url);
+		for (let header in headers) {
+			xhr.setRequestHeader(header, headers[header]);
+		}
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.onreadystatechange = (e) => {
 			if (e.target.readyState == 4) {
@@ -12,8 +15,8 @@ loader.addModule('request', () => {
 	}
 
 	return {
-		post: (url, data, doneCallback) => {
-			_request("POST", url, data, doneCallback);
+		post: (url, data, headers, doneCallback) => {
+			_request("POST", url, data, headers, doneCallback);
 		}
 	};
 });
