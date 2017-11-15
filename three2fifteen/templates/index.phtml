@@ -1,7 +1,11 @@
 {% extends "layout.phtml" %}
 {% block body %}
+	<header id="header">
+		<a id="logout-button" href="">Sign out</a>
+	</header>
 	Index {{ module }}
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/home.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts/widgets/header.js') }}"></script>
 {% endblock %}
