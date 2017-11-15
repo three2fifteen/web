@@ -12,9 +12,6 @@ loader.addModule('page',
 	}
 
 	return {
-		'needsLoggedIn': () => {
-			return false;
-		},
 		'action': () => {
 			let form = B.$id('login-form');
 			const to = form.to.value == '/login' && '/' || form.to.value;

@@ -1,8 +1,7 @@
 loader.addModule('page', () => {
 	return {
-		'needsLoggedIn': () => {
-			return true;
-		},
+		'dataUrls': [
+		],
 		'action': () => {
 			console.log("home");
 		}
