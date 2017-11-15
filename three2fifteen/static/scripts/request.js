@@ -17,6 +17,9 @@ loader.addModule('request', () => {
 	return {
 		post: (url, data, headers, doneCallback) => {
 			_request("POST", url, data, headers, doneCallback);
+		},
+		get: (url, headers, doneCallback) => {
+			_request("GET", url, null, headers, doneCallback);
 		}
 	};
 });
