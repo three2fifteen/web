@@ -17,7 +17,7 @@ def login():
     return render_template('login.phtml', to=to)
 
 
-@bp.route('/signup')
+@bp.route('/sign-up')
 def signup():
     return render_template('signup.phtml')
 
