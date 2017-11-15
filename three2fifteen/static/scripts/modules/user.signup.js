@@ -11,9 +11,6 @@ loader.addModule('page',
 	}
 
 	return {
-		'needsLoggedIn': () => {
-			return false;
-		},
 		'action': () => {
 			let form = B.$id('signup-form');
 			auth.isLoggedIn() && utils.goToUrl('/');
