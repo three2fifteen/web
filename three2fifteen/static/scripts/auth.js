@@ -5,6 +5,9 @@ loader.addModule('auth',
 		'setToken': (token) => {
 			window.localStorage.setItem(TOKEN_KEY, token);
 		},
+		'getToken': () => {
+			return window.localStorage.getItem(TOKEN_KEY);
+		},
 		'unsetToken': () => {
 			window.localStorage.removeItem(TOKEN_KEY);
 		},
