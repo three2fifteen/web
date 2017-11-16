@@ -23,7 +23,6 @@ function (auth, request, utils, config) {
 
 	function getModuleData(module) {
 		let urls = module.dataUrls;
-		var funcToRun;
 
 		new Promise(function(resolve, reject) {
 			if (!auth.isLoggedIn()) {
