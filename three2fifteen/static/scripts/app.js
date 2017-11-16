@@ -1,12 +1,12 @@
 loader.addModule('app',
 'page', 'auth', 'request', 'utils', 'config',
 function (page, auth, request, utils, config) {
-	function setPageData(page, dataKey, data) {
-		if (!page.data) {
-			page.data = {};
+	function setPageData(module, dataKey, data) {
+		if (!module.data) {
+			module.data = {};
 		}
 
-		page.data[dataKey] = data;
+		module.data[dataKey] = data;
 	}
 
 	function handleError(error) {
@@ -40,27 +40,31 @@ function (page, auth, request, utils, config) {
 						return;
 					}
 
-					setPageData(page, url.name, response);
+					setPageData(module, url.name, response);
 					if (urls.length) {
 						resolve(urls);
 					}
 					else {
-						page.action();
+						module.action();
 					}
 			});
 		})
-		.then(getPageData)
+		.then(getModuleData)
 		.catch(handleError);
 	}
 
+	let modules = [page];
+
 	return {
 		run: () => {
-			if (page.dataUrls) {
-				getModuleData(page);
-			}
-			else {
-				page.action();
-			}
+			modules.forEach((module) => {
+				if (module.dataUrls) {
+					getModuleData(module);
+				}
+				else {
+					module.action();
+				}
+			});
 		}
 	};
 });
