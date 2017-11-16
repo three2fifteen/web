@@ -21,7 +21,8 @@ function (page, auth, request, utils, config) {
 		}
 	}
 
-	function getPageData(urls) {
+	function getModuleData(module) {
+		let urls = module.dataUrls;
 		var funcToRun;
 
 		new Promise(function(resolve, reject) {
@@ -55,7 +56,7 @@ function (page, auth, request, utils, config) {
 	return {
 		run: () => {
 			if (page.dataUrls) {
-				getModuleData(page.dataUrls);
+				getModuleData(page);
 			}
 			else {
 				page.action();
