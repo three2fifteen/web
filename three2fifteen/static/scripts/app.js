@@ -1,4 +1,4 @@
-loader.executeModule('main',
+loader.addModule('app',
 'page', 'auth', 'request', 'utils', 'config',
 function (page, auth, request, utils, config) {
 	function setPageData(page, dataKey, data) {
@@ -52,10 +52,14 @@ function (page, auth, request, utils, config) {
 		.catch(handleError);
 	}
 
-	if (page.dataUrls) {
-		getPageData(page.dataUrls);
-	}
-	else {
-		page.action();
-	}
+	return {
+		run: () => {
+			if (page.dataUrls) {
+				getModuleData(page.dataUrls);
+			}
+			else {
+				page.action();
+			}
+		}
+	};
 });
