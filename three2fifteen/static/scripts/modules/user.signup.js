@@ -1,15 +1,6 @@
 loader.executeModule('signupModule',
 'auth', 'request', 'config', 'B', 'utils', 'app',
 (auth, request, config, B, utils, app) => {
-	function _signupResponseHandler(statusCode, body) {
-		if (statusCode == 200) {
-			utils.goToUrl('/login');
-		}
-		else {
-			B.$id("form-message").innerHTML = JSON.parse(body).message;
-		}
-	}
-
 	app.addModule({
 		'action': () => {
 			let form = B.$id('signup-form');
@@ -26,7 +17,7 @@ loader.executeModule('signupModule',
 					}),
 					{},
 					(statusCode, body) => {
-						_signupResponseHandler(statusCode, body);
+						utils.apiResponseHandler(statusCode, body, to);
 					}
 				);
 			});

@@ -1,16 +1,6 @@
 loader.executeModule('loginModule',
 'auth', 'request', 'config', 'B', 'utils', 'app',
 (auth, request, config, B, utils, app) => {
-	function _loginResponseHandler(statusCode, body, dest_url) {
-		if (statusCode == 200) {
-			auth.setToken(JSON.parse(body).access_token);
-			utils.goToUrl(dest_url);
-		}
-		else {
-			B.$id("form-message").innerHTML = JSON.parse(body).message;
-		}
-	}
-
 	app.addModule({
 		'action': () => {
 			let form = B.$id('login-form');
@@ -28,7 +18,9 @@ loader.executeModule('loginModule',
 					}),
 					{},
 					(statusCode, body) => {
-						_loginResponseHandler(statusCode, body, to);
+						utils.apiResponseHandler(statusCode, body, to, (body) => {
+							auth.setToken(body.access_token);
+						});
 					}
 				);
 			});
