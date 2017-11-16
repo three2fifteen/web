@@ -1,12 +1,12 @@
-loader.executeModule('main',
-'page', 'auth', 'request', 'utils', 'config',
-function (page, auth, request, utils, config) {
-	function setPageData(page, dataKey, data) {
-		if (!page.data) {
-			page.data = {};
+loader.addModule('app',
+'auth', 'request', 'utils', 'config',
+function (auth, request, utils, config) {
+	function setPageData(module, dataKey, data) {
+		if (!module.data) {
+			module.data = {};
 		}
 
-		page.data[dataKey] = data;
+		module.data[dataKey] = data;
 	}
 
 	function handleError(error) {
@@ -21,8 +21,8 @@ function (page, auth, request, utils, config) {
 		}
 	}
 
-	function getPageData(urls) {
-		var funcToRun;
+	function getModuleData(module) {
+		let urls = module.dataUrls;
 
 		new Promise(function(resolve, reject) {
 			if (!auth.isLoggedIn()) {
@@ -39,23 +39,34 @@ function (page, auth, request, utils, config) {
 						return;
 					}
 
-					setPageData(page, url.name, response);
+					setPageData(module, url.name, response);
 					if (urls.length) {
 						resolve(urls);
 					}
 					else {
-						page.action();
+						module.action();
 					}
 			});
 		})
-		.then(getPageData)
+		.then(getModuleData)
 		.catch(handleError);
 	}
 
-	if (page.dataUrls) {
-		getPageData(page.dataUrls);
-	}
-	else {
-		page.action();
-	}
+	let modules = [];
+
+	return {
+		addModule: (module) => {
+			modules.push(module);
+		},
+		run: () => {
+			modules.forEach((module) => {
+				if (module.dataUrls) {
+					getModuleData(module);
+				}
+				else {
+					module.action();
+				}
+			});
+		}
+	};
 });

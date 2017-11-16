@@ -1,6 +1,6 @@
-loader.addModule('page',
-'auth', 'request', 'config', 'B', 'utils',
-(auth, request, config, B, utils) => {
+loader.executeModule('signupModule',
+'auth', 'request', 'config', 'B', 'utils', 'app',
+(auth, request, config, B, utils, app) => {
 	function _signupResponseHandler(statusCode, body) {
 		if (statusCode == 200) {
 			utils.goToUrl('/login');
@@ -10,7 +10,7 @@ loader.addModule('page',
 		}
 	}
 
-	return {
+	app.addModule({
 		'action': () => {
 			let form = B.$id('signup-form');
 			auth.isLoggedIn() && utils.goToUrl('/');
@@ -31,5 +31,5 @@ loader.addModule('page',
 				);
 			});
 		}
-	};
+	});
 });
