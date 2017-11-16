@@ -1,8 +1,6 @@
 {% extends "layout.phtml" %}
 {% block body %}
-	<header id="header">
-		<a id="logout-button" href="">Sign out</a>
-	</header>
+	{% include "header.phtml" %}
 	Index {{ module }}
 {% endblock %}
 {% block scripts %}
