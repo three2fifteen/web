@@ -1,6 +1,6 @@
 loader.addModule('app',
-'page', 'auth', 'request', 'utils', 'config',
-function (page, auth, request, utils, config) {
+'auth', 'request', 'utils', 'config',
+function (auth, request, utils, config) {
 	function setPageData(module, dataKey, data) {
 		if (!module.data) {
 			module.data = {};
@@ -53,9 +53,12 @@ function (page, auth, request, utils, config) {
 		.catch(handleError);
 	}
 
-	let modules = [page];
+	let modules = [];
 
 	return {
+		addModule: (module) => {
+			modules.push(module);
+		},
 		run: () => {
 			modules.forEach((module) => {
 				if (module.dataUrls) {
