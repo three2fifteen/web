@@ -1,7 +1,28 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
-	Index {{ module }}
+	<h1>My Games</h1>
+	<a href="/game/create">Start new game</a>
+	<ul id="list-games"></ul>
+
+	<!-- Templates used by the javascript application to populate the page with data-->
+	<!-- Template to represent a game of the current player -->
+	<script type="template" id="game-instance">
+		<li>
+			game [[game.public_id]]
+			number of players: [[game.number_players]]
+			<ul>
+				[[each game.game_players as player on game_player]]
+			</ul>
+		</li>
+	</script>
+
+	<!-- Template to represent a user of a game -->
+	<script type="template" id="game-player">
+		<li>
+			[[player]]
+		</li>
+	</script>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/home.js') }}"></script>
