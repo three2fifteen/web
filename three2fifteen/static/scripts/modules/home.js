@@ -11,15 +11,10 @@ loader.executeModule('homeModule',
 				game_player: {html: B.$id('game-player').innerHTML}
 			});
 			module.data.games.forEach((game) => {
-				let htmlParser = new DOMParser();
-				const node = htmlParser.parseFromString(
-					B.Template.compile('game', {game: game}),
-					'text/xml'
-				);
-
-				B.$id('list-games').appendChild(node.firstChild);
+				game.current_players_count = game.game_players.length;
+				const gameHTML = B.Template.compile('game', {game: game});
+				B.$id('list-games').innerHTML += gameHTML;
 			});
-			console.log("home");
 		}
 	};
 	app.addModule(module);
