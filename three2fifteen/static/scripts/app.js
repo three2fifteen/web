@@ -6,7 +6,7 @@ function (auth, request, utils, config) {
 			module.data = {};
 		}
 
-		module.data[dataKey] = data;
+		module.data[dataKey] = JSON.parse(data);
 	}
 
 	function handleError(error) {
