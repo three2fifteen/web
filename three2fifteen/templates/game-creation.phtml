@@ -1,0 +1,13 @@
+{% extends "layout.phtml" %}
+{% block body %}
+	{% include "header.phtml" %}
+	<form id="game-creation-form" method="POST" action="">
+		<div id="form-message"></div>
+		<input type="number" name="nbPlayers" min="2" max="4" placeholder="Number of players" />
+		<input type="submit" value="Create" />
+	</form>
+{% endblock %}
+{% block scripts %}
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/game.create.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/header.js') }}"></script>
+{% endblock %}

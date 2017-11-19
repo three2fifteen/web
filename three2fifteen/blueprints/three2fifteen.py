@@ -27,3 +27,8 @@ def config():
     controller = ConfigController(current_app.config)
     return Response(render_template('config.js', data=controller.get()),
                     mimetype='application/javascript')
+
+
+@bp.route('/game/create')
+def game_creation():
+    return render_template('game-creation.phtml')
