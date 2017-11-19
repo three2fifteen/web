@@ -19,7 +19,6 @@ loader.executeModule('homeModule',
 
 				B.$id('list-games').appendChild(node.firstChild);
 			});
-			console.log("home");
 		}
 	};
 	app.addModule(module);
