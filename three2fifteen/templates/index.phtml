@@ -9,8 +9,8 @@
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
 		<li>
-			game [[game.public_id]]
-			number of players: [[game.current_players_count]] / [[game.number_players]]
+			<p>game [[game.public_id]]</p>
+			<p>number of players: [[game.current_players_count]] / [[game.number_players]]</p>
 			<ul>
 				[[each game.game_players as player on game_player]]
 			</ul>
@@ -20,7 +20,7 @@
 	<!-- Template to represent a user of a game -->
 	<script type="template" id="game-player">
 		<li>
-			[[player]]
+			Player: [[player]]
 		</li>
 	</script>
 {% endblock %}
