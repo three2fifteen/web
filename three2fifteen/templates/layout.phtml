@@ -3,6 +3,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Three 2 Fifteen</title>
+		{% if game_id %}
+		<meta id="current_game_id" data-value="{{ game_id }}" />
+		{% endif %}
 	</head>
 	<body>
 		{% block body %}{% endblock %}

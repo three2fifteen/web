@@ -1,6 +1,6 @@
 loader.executeModule('homeModule',
-'config', 'app', 'B',
-(config, app, B) => {
+'app', 'B',
+(app, B) => {
 	let module = {
 		'dataUrls': [
 			{'url': config.api_get_games, 'name': 'games'}

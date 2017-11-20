@@ -32,3 +32,8 @@ def config():
 @bp.route('/game/create')
 def game_creation():
     return render_template('game-creation.phtml')
+
+
+@bp.route('/game/<int:game_id>')
+def game_page(game_id):
+    return render_template('game-page.phtml', game_id=game_id)
