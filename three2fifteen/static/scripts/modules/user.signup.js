@@ -17,7 +17,7 @@ loader.executeModule('signupModule',
 					}),
 					{},
 					(statusCode, body) => {
-						utils.apiResponseHandler(statusCode, body, to);
+						utils.apiResponseHandler(statusCode, body, '/');
 					}
 				);
 			});
