@@ -13,6 +13,7 @@ loader.executeModule('signupModule',
 					config.api_host + config.api_signup,
 					JSON.stringify({
 						'username': form.username.value,
+						'name': form.name.value,
 						'password': form.password.value
 					}),
 					{},
