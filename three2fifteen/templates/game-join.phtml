@@ -1,6 +1,7 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
+	<span id="error"></span>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/game.join.js') }}"></script>
