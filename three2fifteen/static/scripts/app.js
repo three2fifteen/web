@@ -32,7 +32,7 @@ function (auth, request, utils, config) {
 			const url = urls.shift();
 			request.get(
 				config.api_host + url.url,
-				{'X-Token': auth.getToken()},
+				auth.getHeader(),
 				(response_status, response) => {
 					if (response_status != 200) {
 						reject(response_status);

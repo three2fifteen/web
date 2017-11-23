@@ -13,6 +13,9 @@ loader.addModule('auth',
 		},
 		'isLoggedIn': () => {
 			return window.localStorage.getItem(TOKEN_KEY) != null;
+		},
+		'getHeader': () => {
+			return {'X-Token': window.localStorage.getItem(TOKEN_KEY)}
 		}
 	};
 });

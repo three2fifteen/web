@@ -12,7 +12,7 @@ loader.executeModule('gameCreateModule',
 					JSON.stringify({
 						'number_players': form.nbPlayers.value
 					}),
-					{'X-Token': auth.getToken()},
+					auth.getHeader(),
 					(statusCode, body) => {
 						utils.apiResponseHandler(statusCode, body, '/');
 					}
