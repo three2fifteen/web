@@ -6,6 +6,8 @@
 		{% if game_id %}
 		<meta id="current_game_id" data-value="{{ game_id }}" />
 		{% endif %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}">
+		<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
 	</head>
 	<body>
 		{% block body %}{% endblock %}

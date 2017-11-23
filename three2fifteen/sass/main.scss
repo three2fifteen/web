@@ -1,0 +1,35 @@
+@import "config";
+*,
+*::after,
+*::before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html{
+	font-size: 14px;
+}
+
+body {
+  background: $background-color;
+	font: $body;
+}
+
+h1{
+	font: $display1;
+}
+
+h2{
+	font: $headline;
+}
+
+h3{
+	font: $header;
+}
+
+h4{
+	font: $subhead;
+}
+
+h5{
+	font: $body2;
+}
