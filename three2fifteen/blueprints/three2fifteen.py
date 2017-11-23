@@ -38,3 +38,10 @@ def game_creation():
 def game_page(game_id):
     return render_template('game-page.phtml',
                            data=[{'key': 'current_game_id', 'value': game_id}])
+
+
+@bp.route('/game/join/<string:game_public_id>')
+def game_join(game_public_id):
+    return render_template('game-join.phtml',
+                           data=[{'key': 'game_public_id',
+                                  'value': game_public_id}])
