@@ -13,6 +13,13 @@ loader.addModule('utils', 'B', (B) => {
 		},
 		goToUrl: (to) => {
 			window.location.replace(to);
+		},
+		// VERY Quick and dirty string formating
+		format: (str, args) => {
+			for (let replace of args) {
+				str = str.replace("%s", replace);
+			}
+			return str;
 		}
 	};
 
