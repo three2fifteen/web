@@ -36,4 +36,5 @@ def game_creation():
 
 @bp.route('/game/<int:game_id>')
 def game_page(game_id):
-    return render_template('game-page.phtml', game_id=game_id)
+    return render_template('game-page.phtml',
+                           data=[{'key': 'current_game_id', 'value': game_id}])
