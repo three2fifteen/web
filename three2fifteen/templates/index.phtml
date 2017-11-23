@@ -9,7 +9,10 @@
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
 		<li>
-			<p>game [[game.public_id]]</p>
+			<p>
+				game
+				<span>Invite link: <a href="/game/join/[[game.public_id]]">Copy link</a>
+			</p>
 			<p>number of players: [[game.current_players_count]] / [[game.number_players]]</p>
 			<ul>
 				[[each game.game_players as player on game_player]]
