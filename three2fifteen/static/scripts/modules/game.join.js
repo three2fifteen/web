@@ -5,6 +5,9 @@ loader.executeModule('gameJoinModule',
 		if (statusCode == 200) {
 			utils.goToUrl('/');
 		}
+		else if (statusCode == 401) {
+			utils.goToUrl('/login?to=' + window.location.href);
+		}
 		else {
 			B.$id('error').innerHTML = JSON.parse(body).message;
 		}
