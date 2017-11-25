@@ -13,7 +13,7 @@ function (auth, request, utils, config) {
 		if (error == 401) {
 			utils.goToUrl('/login');
 		}
-		else if (typeof(error) == 'number') {
+		else if (error == 404) {
 			utils.goToUrl('/404');
 		}
 		else {
