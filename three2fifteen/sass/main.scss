@@ -33,3 +33,25 @@ h4{
 h5{
 	font: $body2;
 }
+
+.fullscreen{
+	height: 100vh;
+}
+
+.btn-full-width{
+	width: 100%;
+}
+
+.gray-card{
+	background-color: $light-gray!important;
+	padding: 16px;
+}
+
+.btn-primary{
+	background-color: $blue;
+	border-color: $blue;
+}
+
+.btn{
+	height: 36px;
+}
