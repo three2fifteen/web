@@ -1,13 +1,34 @@
 {% extends "layout.phtml" %}
 {% block body %}
-	No account? <a href="/sign-up">Sign up</a>
-	<form id="login-form" method="POST" action="">
-		<div id="form-message"></div>
-		<input type="hidden" name="to" value="{{ to }}" />
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<input type="submit" value="Log in" />
-	</form>
+<div class="container">
+	<div class="row align-items-center justify-content-md-center fullscreen">
+		<div class="col-sm-4 login card gray-card">
+			<h2>Sign In</h2>
+			<form id="login-form" method="POST" action="">
+				<div id="form-message"></div>
+
+				<div class="form-group">
+					<input type="hidden" name="to" value="{{ to }}" />
+					<label for="exampleInputEmail1">Email address</label>
+					<input type="text" name="username" placeholder="Username" class="form-control" id="exampleFormControlInput1" />
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Password</label>
+					<input type="password" name="password" placeholder="Password" class="form-control" id="exampleInputPassword1"/>
+				</div>
+				<input type="submit" class="btn btn-primary btn-full-width" value="Log in" />
+
+			</form>
+			<hr/>
+			Don't have account?
+			<a href="/sign-up">Sign up</a>
+
+
+		</div>
+
+
+	</div>
+</div>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/modules/user.login.js') }}"></script>
