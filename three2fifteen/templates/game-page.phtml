@@ -1,7 +1,19 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
-	Game page
+	<div id="game-section"></div>
+
+	<script type="template" id="game-ongoing">
+		Game ongoing
+	</script>
+
+	<script type="template" id="game-open">
+		Game open
+	</script>
+
+	<script type="template" id="game-finished">
+		Game finished
+	</script>
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/game.js') }}"></script>
