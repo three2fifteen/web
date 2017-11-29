@@ -10,5 +10,8 @@ class ConfigController(object):
             'api_get_games': self.config['API_GET_GAMES'],
             'api_get_game': self.config['API_GET_GAME'],
             'api_create_game': self.config['API_CREATE_GAME'],
-            'api_join_game': self.config['API_JOIN_GAME']
+            'api_join_game': self.config['API_JOIN_GAME'],
+            'api_get_board': self.config['API_GET_BOARD'],
+            'api_get_game_content': self.config['API_GET_GAME_CONTENT'],
+            'api_get_hand': self.config['API_GET_HAND']
         }

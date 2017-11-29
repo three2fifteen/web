@@ -4,7 +4,10 @@ loader.executeModule('gamePageModule',
 	const gameId = B.$id('current_game_id').dataset.value;
 	let module = {
 		'dataUrls': [
-			{'url': utils.format(config.api_get_game, [gameId]), 'name': 'game'}
+			{'url': config.api_get_board, 'name': 'board'},
+			{'url': utils.format(config.api_get_game_content, [gameId]), 'name': 'game_content'},
+			{'url': utils.format(config.api_get_game, [gameId]), 'name': 'game'},
+			{'url': utils.format(config.api_get_hand, [gameId]), 'name': 'player_hand'}
 		],
 		'action': () => {
 			B.Template.init({
