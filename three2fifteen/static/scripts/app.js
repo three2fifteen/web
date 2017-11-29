@@ -41,7 +41,7 @@ function (auth, request, utils, config) {
 
 					setPageData(module, url.name, response);
 					if (urls.length) {
-						resolve(urls);
+						resolve(module);
 					}
 					else {
 						module.action();
