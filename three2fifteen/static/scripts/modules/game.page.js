@@ -1,9 +1,10 @@
 loader.executeModule('gamePageModule',
 'config', 'app', 'B', 'utils', 'Game',
 (config, app, B, utils, Game) => {
+	const gameId = B.$id('current_game_id').dataset.value;
 	let module = {
 		'dataUrls': [
-			{'url': utils.format(config.api_get_game, [B.$id('current_game_id').dataset.value]), 'name': 'game'}
+			{'url': utils.format(config.api_get_game, [gameId]), 'name': 'game'}
 		],
 		'action': () => {
 			B.Template.init({
