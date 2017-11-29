@@ -1,6 +1,6 @@
 loader.executeModule('homeModule',
-'config', 'app', 'B',
-(config, app, B) => {
+'config', 'app', 'B', 'Game',
+(config, app, B, Game) => {
 	let module = {
 		'dataUrls': [
 			{'url': config.api_get_games, 'name': 'games'}
@@ -13,9 +13,7 @@ loader.executeModule('homeModule',
 				game_invite_link: {html: B.$id('game-invite-link').innerHTML}
 			});
 			module.data.games.forEach((game) => {
-				game.current_players_count = game.game_players.length;
-				game.ongoing = game.date_started && !game.date_finished;
-				game.open = game.current_players_count < game.number_players;
+				Game.analyseGame(game);
 				const gameHTML = B.Template.compile('game', {game: game});
 				B.$id('list-games').innerHTML += gameHTML;
 			});
