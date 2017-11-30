@@ -8,6 +8,13 @@
 		<ul id="board">
 			[[each board as cell on board_cell]]
 		</ul>
+		<ul id="player-hand">
+			[[each player_hand as token on player_token]]
+		</ul>
+	</script>
+
+	<script type="template" id="player-token">
+		<li>[[token]]</li>
 	</script>
 
 	<script type="template" id="board-cell">

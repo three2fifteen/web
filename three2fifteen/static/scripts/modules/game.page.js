@@ -14,6 +14,7 @@ loader.executeModule('gamePageModule',
 				game_ongoing: {html: B.$id('game-ongoing').innerHTML},
 				game_open: {html: B.$id('game-open').innerHTML},
 				game_finished: {html: B.$id('game-finished').innerHTML},
+				player_token: {html: B.$id('player-token').innerHTML},
 				board_cell: {html: B.$id('board-cell').innerHTML}
 			});
 
