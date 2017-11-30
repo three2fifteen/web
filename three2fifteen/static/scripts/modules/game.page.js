@@ -13,7 +13,8 @@ loader.executeModule('gamePageModule',
 			B.Template.init({
 				game_ongoing: {html: B.$id('game-ongoing').innerHTML},
 				game_open: {html: B.$id('game-open').innerHTML},
-				game_finished: {html: B.$id('game-finished').innerHTML}
+				game_finished: {html: B.$id('game-finished').innerHTML},
+				board_cell: {html: B.$id('board-cell').innerHTML}
 			});
 
 			Game.analyseGame(module.data.game);

@@ -5,6 +5,15 @@
 
 	<script type="template" id="game-ongoing">
 		Game ongoing
+		<ul id="board">
+			[[each board as cell on board_cell]]
+		</ul>
+	</script>
+
+	<script type="template" id="board-cell">
+		<li class="cell-[[cell.type]]">
+			[[cell.type]]
+		</li>
 	</script>
 
 	<script type="template" id="game-open">
