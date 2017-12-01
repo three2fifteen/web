@@ -14,11 +14,11 @@
 	</script>
 
 	<script type="template" id="player-token">
-		<li>[[token]]</li>
+		<li data-value="[[token]]">[[token]]</li>
 	</script>
 
 	<script type="template" id="board-cell">
-		<li class="cell-[[cell.type]]">
+		<li class="cell-[[cell.type]]" data-x="[[cell.x]]" data-y="[[cell.y]]">
 			[[cell.type]]
 		</li>
 	</script>
