@@ -34,6 +34,16 @@ loader.executeModule('gamePageModule',
 				template,
 				module.data
 			);
+			B.$id('player-hand').addEventListener('click', (e) => {
+				let node = e.target;
+				while (node && node.nodeName != 'LI') {
+					node = node.parentNode;
+				}
+
+				if (node) {
+					Game.prepareToken(node.dataset.value);
+				}
+			});
 		}
 	};
 	app.addModule(module);
