@@ -34,15 +34,17 @@ loader.executeModule('gamePageModule',
 				template,
 				module.data
 			);
-			B.$id('player-hand').addEventListener('click', (e) => {
-				let node = e.target;
+
+			const getLiNode = (node) => {
 				while (node && node.nodeName != 'LI') {
 					node = node.parentNode;
 				}
+				return node;
+			};
 
-				if (node) {
-					Game.prepareToken(node.dataset.value);
-				}
+			B.$id('player-hand').addEventListener('click', (e) => {
+				const node = getLiNode(e.target);
+				node && Game.prepareToken(node.dataset.value);
 			});
 		}
 	};
