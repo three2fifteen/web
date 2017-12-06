@@ -45,11 +45,6 @@ loader.executeModule('gamePageModule',
 				}
 				return node;
 			};
-
-			B.$id('player-hand').addEventListener('click', (e) => {
-				const node = getLiNode(e.target);
-				node && Game.prepareToken(node.dataset.value);
-			});
 		}
 	};
 	app.addModule(module);
