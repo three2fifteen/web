@@ -30,6 +30,10 @@ loader.executeModule('gamePageModule',
 				template = 'game_ongoing';
 			}
 
+			module.data.player_hand.forEach((token, index) => {
+				module.data.player_hand[index] = {'value': token, 'index': index};
+			});
+
 			B.$id('game-section').innerHTML = B.Template.compile(
 				template,
 				module.data

@@ -14,7 +14,11 @@
 	</script>
 
 	<script type="template" id="player-token">
-		<li data-value="[[token]]">[[token]]</li>
+		<li>
+			<div class="token" id="player-token-[[token.index]]"data-value="[[token.value]]" draggable="true">
+				[[token.value]]
+			</div>
+		</li>
 	</script>
 
 	<script type="template" id="board-cell">
