@@ -45,6 +45,23 @@ loader.executeModule('gamePageModule',
 				}
 				return node;
 			};
+
+			document.querySelectorAll('#player-hand .token').forEach((token) => {
+				token.addEventListener('dragstart', (e) => {
+					e.dataTransfer.setData('token-id', token.id);
+				});
+			});
+			document.querySelectorAll('#board li').forEach((place) => {
+				place.addEventListener('dragover', (e) => {
+					e.preventDefault();
+				}, false);
+				place.addEventListener('drop', (e) => {
+					e.target.appendChild(
+						B.$id(e.dataTransfer.getData('token-id'))
+					);
+					e.preventDefault();
+				}, false);
+			});
 		}
 	};
 	app.addModule(module);
