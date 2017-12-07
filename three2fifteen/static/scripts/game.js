@@ -10,11 +10,12 @@ loader.addModule('Game',
 				JSON.stringify({'play': Object.values(_currentPlay)}),
 				auth.getHeader(),
 				(statusCode, body) => {
+					body = JSON.parse(body);
 					if (statusCode != 200) {
-						reject(JSON.parse(body).message);
+						reject(body.message);
 					}
 
-					resolve();
+					resolve(body.score);
 				}
 			);
 		});

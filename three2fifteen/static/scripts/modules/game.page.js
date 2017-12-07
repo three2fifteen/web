@@ -29,8 +29,8 @@ loader.executeModule('gamePageModule',
 			parseInt(li.dataset.x),
 			parseInt(li.dataset.y),
 			parseInt(token.dataset.value)
-		).then(() => {
-			B.$id('play-result').innerHTML = '';
+		).then((score) => {
+			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
 		}).catch((error) => {
 			B.$id('play-result').innerHTML = error;
 		});
