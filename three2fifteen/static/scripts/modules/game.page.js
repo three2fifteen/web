@@ -10,11 +10,11 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
-	const _tokenOver = (e) => {
+	const _tokenOverBoard = (e) => {
 		e.preventDefault();
 	}
 
-	const _dropToken = (e) => {
+	const _dropTokenBoard = (e) => {
 		e.preventDefault();
 		const li = getLiNode(e.target);
 		const token = B.$id(e.dataTransfer.getData('token-id'));
@@ -81,8 +81,8 @@ loader.executeModule('gamePageModule',
 				});
 			});
 			document.querySelectorAll('#board li').forEach((place) => {
-				place.addEventListener('dragover', _tokenOver, false);
-				place.addEventListener('drop', _dropToken, false);
+				place.addEventListener('dragover', _tokenOverBoard, false);
+				place.addEventListener('drop', _dropTokenBoard, false);
 			});
 		}
 	};
