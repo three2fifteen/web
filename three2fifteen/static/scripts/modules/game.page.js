@@ -2,6 +2,25 @@ loader.executeModule('gamePageModule',
 'config', 'app', 'B', 'utils', 'Game',
 (config, app, B, utils, Game) => {
 	const gameId = B.$id('current_game_id').dataset.value;
+
+	const getLiNode = (node) => {
+		while (node && node.nodeName != 'LI') {
+			node = node.parentNode;
+		}
+		return node;
+	};
+
+	const _tokenOver = (e) => {
+		e.preventDefault();
+	}
+
+	const _dropToken = (e) => {
+		e.preventDefault();
+		const li = getLiNode(e.target);
+		const token = B.$id(e.dataTransfer.getData('token-id'));
+		li.appendChild(token);
+	};
+
 	let module = {
 		'dataUrls': [
 			{'url': config.api_get_board, 'name': 'board'},
@@ -39,28 +58,14 @@ loader.executeModule('gamePageModule',
 				module.data
 			);
 
-			const getLiNode = (node) => {
-				while (node && node.nodeName != 'LI') {
-					node = node.parentNode;
-				}
-				return node;
-			};
-
 			document.querySelectorAll('#player-hand .token').forEach((token) => {
 				token.addEventListener('dragstart', (e) => {
 					e.dataTransfer.setData('token-id', token.id);
 				});
 			});
 			document.querySelectorAll('#board li').forEach((place) => {
-				place.addEventListener('dragover', (e) => {
-					e.preventDefault();
-				}, false);
-				place.addEventListener('drop', (e) => {
-					e.target.appendChild(
-						B.$id(e.dataTransfer.getData('token-id'))
-					);
-					e.preventDefault();
-				}, false);
+				place.addEventListener('dragover', _tokenOver, false);
+				place.addEventListener('drop', _dropToken, false);
 			});
 		}
 	};
