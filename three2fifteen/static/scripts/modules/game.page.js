@@ -30,9 +30,9 @@ loader.executeModule('gamePageModule',
 			parseInt(li.dataset.y),
 			parseInt(token.dataset.value)
 		).then(() => {
-			console.log('play ok');
+			B.$id('play-result').innerHTML = '';
 		}).catch((error) => {
-			console.log(error);
+			B.$id('play-result').innerHTML = error;
 		});
 	};
 
