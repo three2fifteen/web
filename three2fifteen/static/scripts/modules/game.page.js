@@ -37,7 +37,13 @@ loader.executeModule('gamePageModule',
 				board_cell: {html: B.$id('board-cell').innerHTML}
 			});
 
+			// Analyse data
 			Game.analyseGame(module.data.game);
+			module.data.player_hand.forEach((token, index) => {
+				module.data.player_hand[index] = {'value': token, 'index': index};
+			});
+
+			// Render page
 			let template;
 			if (module.data.game.open) {
 				template = 'game_open';
@@ -48,16 +54,12 @@ loader.executeModule('gamePageModule',
 			else {
 				template = 'game_ongoing';
 			}
-
-			module.data.player_hand.forEach((token, index) => {
-				module.data.player_hand[index] = {'value': token, 'index': index};
-			});
-
 			B.$id('game-section').innerHTML = B.Template.compile(
 				template,
 				module.data
 			);
 
+			// Set events
 			document.querySelectorAll('#player-hand .token').forEach((token) => {
 				token.addEventListener('dragstart', (e) => {
 					e.dataTransfer.setData('token-id', token.id);
