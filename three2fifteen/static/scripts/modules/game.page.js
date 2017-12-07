@@ -2,6 +2,40 @@ loader.executeModule('gamePageModule',
 'config', 'app', 'B', 'utils', 'Game',
 (config, app, B, utils, Game) => {
 	const gameId = B.$id('current_game_id').dataset.value;
+
+	const getLiNode = (node) => {
+		while (node && node.nodeName != 'LI') {
+			node = node.parentNode;
+		}
+		return node;
+	};
+
+	const _tokenOver = (e) => {
+		e.preventDefault();
+	}
+
+	const _dropToken = (e) => {
+		e.preventDefault();
+		const li = getLiNode(e.target);
+		const token = B.$id(e.dataTransfer.getData('token-id'));
+		// Prevent from dropping more than one token in the same space
+		if (li.children.length) {
+			return;
+		}
+		li.appendChild(token);
+		Game.placeToken(
+			gameId,
+			token.id,
+			parseInt(li.dataset.x),
+			parseInt(li.dataset.y),
+			parseInt(token.dataset.value)
+		).then((score) => {
+			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
+		}).catch((error) => {
+			B.$id('play-result').innerHTML = error;
+		});
+	};
+
 	let module = {
 		'dataUrls': [
 			{'url': config.api_get_board, 'name': 'board'},
@@ -18,7 +52,13 @@ loader.executeModule('gamePageModule',
 				board_cell: {html: B.$id('board-cell').innerHTML}
 			});
 
+			// Analyse data
 			Game.analyseGame(module.data.game);
+			module.data.player_hand.forEach((token, index) => {
+				module.data.player_hand[index] = {'value': token, 'index': index};
+			});
+
+			// Render page
 			let template;
 			if (module.data.game.open) {
 				template = 'game_open';
@@ -29,11 +69,21 @@ loader.executeModule('gamePageModule',
 			else {
 				template = 'game_ongoing';
 			}
-
 			B.$id('game-section').innerHTML = B.Template.compile(
 				template,
 				module.data
 			);
+
+			// Set events
+			document.querySelectorAll('#player-hand .token').forEach((token) => {
+				token.addEventListener('dragstart', (e) => {
+					e.dataTransfer.setData('token-id', token.id);
+				});
+			});
+			document.querySelectorAll('#board li').forEach((place) => {
+				place.addEventListener('dragover', _tokenOver, false);
+				place.addEventListener('drop', _dropToken, false);
+			});
 		}
 	};
 	app.addModule(module);
