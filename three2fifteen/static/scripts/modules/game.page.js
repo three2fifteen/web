@@ -10,11 +10,23 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
-	const _tokenOver = (e) => {
+	const _tokenOverHand = (e) => {
 		e.preventDefault();
 	}
 
-	const _dropToken = (e) => {
+	const _tokenOverBoard = (e) => {
+		e.preventDefault();
+	}
+
+	const _resultMove = (move) => {
+		move.then((score) => {
+			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
+		}).catch((error) => {
+			B.$id('play-result').innerHTML = error;
+		});
+	};
+
+	const _dropToken = (e, callback) => {
 		e.preventDefault();
 		const li = getLiNode(e.target);
 		const token = B.$id(e.dataTransfer.getData('token-id'));
@@ -23,16 +35,28 @@ loader.executeModule('gamePageModule',
 			return;
 		}
 		li.appendChild(token);
-		Game.placeToken(
-			gameId,
-			token.id,
-			parseInt(li.dataset.x),
-			parseInt(li.dataset.y),
-			parseInt(token.dataset.value)
-		).then((score) => {
-			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
-		}).catch((error) => {
-			B.$id('play-result').innerHTML = error;
+		const move = callback(token, li);
+		_resultMove(move);
+	};
+
+	const _dropTokenHand = (e) => {
+		_dropToken(e, (token, li) => {
+			return Game.removeToken(
+				gameId,
+				token.id
+			);
+		});
+	};
+
+	const _dropTokenBoard = (e) => {
+		_dropToken(e, (token, li) => {
+			return Game.placeToken(
+				gameId,
+				token.id,
+				parseInt(li.dataset.x),
+				parseInt(li.dataset.y),
+				parseInt(token.dataset.value)
+			);
 		});
 	};
 
@@ -80,9 +104,13 @@ loader.executeModule('gamePageModule',
 					e.dataTransfer.setData('token-id', token.id);
 				});
 			});
+			document.querySelectorAll('#player-hand li').forEach((hand) => {
+				hand.addEventListener('dragover', _tokenOverHand, false);
+				hand.addEventListener('drop', _dropTokenHand, false);
+			});
 			document.querySelectorAll('#board li').forEach((place) => {
-				place.addEventListener('dragover', _tokenOver, false);
-				place.addEventListener('drop', _dropToken, false);
+				place.addEventListener('dragover', _tokenOverBoard, false);
+				place.addEventListener('drop', _dropTokenBoard, false);
 			});
 		}
 	};
