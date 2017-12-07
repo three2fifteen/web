@@ -10,9 +10,33 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
+	const _tokenOverHand = (e) => {
+		e.preventDefault();
+	}
+
 	const _tokenOverBoard = (e) => {
 		e.preventDefault();
 	}
+
+	const _dropTokenHand = (e) => {
+		e.preventDefault();
+		const li = getLiNode(e.target);
+		const token = B.$id(e.dataTransfer.getData('token-id'));
+		// Prevent from dropping more than one token in the same space
+		if (li.children.length) {
+			return;
+		}
+		li.appendChild(token);
+		const move = Game.removeToken(
+			gameId,
+			token.id
+		);
+		move && .then((score) => {
+			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
+		}).catch((error) => {
+			B.$id('play-result').innerHTML = error;
+		});
+	};
 
 	const _dropTokenBoard = (e) => {
 		e.preventDefault();
@@ -79,6 +103,10 @@ loader.executeModule('gamePageModule',
 				token.addEventListener('dragstart', (e) => {
 					e.dataTransfer.setData('token-id', token.id);
 				});
+			});
+			document.querySelectorAll('#player-hand li').forEach((hand) => {
+				hand.addEventListener('dragover', _tokenOverHand, false);
+				hand.addEventListener('drop', _dropTokenHand, false);
 			});
 			document.querySelectorAll('#board li').forEach((place) => {
 				place.addEventListener('dragover', _tokenOverBoard, false);

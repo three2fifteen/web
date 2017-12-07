@@ -30,6 +30,10 @@ loader.addModule('Game',
 		placeToken: (gameId, tokenId, x, y, value) => {
 			_currentPlay[tokenId] = {'value': value, 'x': x, 'y': y};
 			return _checkPlay(gameId);
+		},
+		removeToken: (gameId, tokenId) => {
+			delete _currentPlay[tokenId];
+			return Object.keys(_currentPlay).length && _checkPlay(gameId);
 		}
 	};
 });
