@@ -1,6 +1,29 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
+	<style type="text/css">
+		.token {
+			width: 28px;
+			height: 28px;
+			background-color: rgba(255,255,255,1);
+		}
+
+		#board {
+			list-style: none;
+			width: 460px;
+		}
+
+		#player-hand {
+			clear: both;
+		}
+
+		.cell {
+			float: left;
+			border: 1px black solid;
+			width: 28px;
+			height: 28px;
+		}
+	</style>
 	<div id="game-section"></div>
 
 	<script type="template" id="game-ongoing">
@@ -23,8 +46,7 @@
 	</script>
 
 	<script type="template" id="board-cell">
-		<li class="cell-[[cell.type]]" data-x="[[cell.x]]" data-y="[[cell.y]]">
-			[[cell.type]]
+		<li class="cell cell-[[cell.type]]" data-x="[[cell.x]]" data-y="[[cell.y]]">
 		</li>
 	</script>
 
