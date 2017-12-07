@@ -18,7 +18,22 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 		const li = getLiNode(e.target);
 		const token = B.$id(e.dataTransfer.getData('token-id'));
+		// Prevent from dropping more than one token in the same space
+		if (li.children.length) {
+			return;
+		}
 		li.appendChild(token);
+		Game.placeToken(
+			gameId,
+			token.id,
+			parseInt(li.dataset.x),
+			parseInt(li.dataset.y),
+			parseInt(token.dataset.value)
+		).then(() => {
+			console.log('play ok');
+		}).catch((error) => {
+			console.log(error);
+		});
 	};
 
 	let module = {
