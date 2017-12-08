@@ -18,9 +18,16 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
-	const _resultMove = (move) => {
+	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
-			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
+			let message;
+			if (dryRun) {
+				message = 'This play would give you ';
+			}
+			else {
+				message = 'You scored ';
+			}
+			B.$id('play-result').innerHTML = message + score + ' points';
 		}).catch((error) => {
 			B.$id('play-result').innerHTML = error;
 		});
@@ -36,7 +43,7 @@ loader.executeModule('gamePageModule',
 		}
 		li.appendChild(token);
 		const move = callback(token, li);
-		_resultMove(move);
+		_resultMove(move, true);
 	};
 
 	const _dropTokenHand = (e) => {
