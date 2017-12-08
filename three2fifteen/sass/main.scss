@@ -48,9 +48,26 @@ h5{
 
 .btn-primary{
 	background-color: $blue;
-	border-color: $blue;
+	border-color: $primary-color;
 }
 
+.bg-primary{
+	background-color:$primary-color!important;
+}
+
+.btn-light{
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.btn-light:hover{
+	background-color: rgba(255,255,255,0.2);
+	border-color: rgba(255,255,255,0.2);
+}
 .btn{
 	height: 36px;
+}
+
+.btn:hover{
+	cursor: pointer;
 }
