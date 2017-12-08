@@ -3,7 +3,7 @@ loader.addModule('Game',
 (request, config, auth, utils) => {
 	let _currentPlay = {};
 
-	const _checkPlay = (gameId) => {
+	const _play = (gameId) => {
 		return new Promise((resolve, reject) => {
 			request.put(
 				utils.format(config.api_host + config.api_turn_check, [gameId]),
@@ -29,11 +29,11 @@ loader.addModule('Game',
 		},
 		placeToken: (gameId, tokenId, x, y, value) => {
 			_currentPlay[tokenId] = {'value': value, 'x': x, 'y': y};
-			return _checkPlay(gameId);
+			return _play(gameId);
 		},
 		removeToken: (gameId, tokenId) => {
 			delete _currentPlay[tokenId];
-			return Object.keys(_currentPlay).length && _checkPlay(gameId);
+			return Object.keys(_currentPlay).length && _play(gameId);
 		}
 	};
 });
