@@ -119,6 +119,12 @@ loader.executeModule('gamePageModule',
 				place.addEventListener('dragover', _tokenOverBoard, false);
 				place.addEventListener('drop', _dropTokenBoard, false);
 			});
+			B.$id('confirm-play').addEventListener('click', (e) => {
+				e.preventDefault();
+				e.preventDefault();
+				const play = Game.play(gameId);
+				_resultMove(play, false);
+			});
 		}
 	};
 	app.addModule(module);

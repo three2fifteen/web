@@ -35,6 +35,9 @@ loader.addModule('Game',
 		removeToken: (gameId, tokenId) => {
 			delete _currentPlay[tokenId];
 			return Object.keys(_currentPlay).length && _play(gameId, true);
+		},
+		play: (gameId) => {
+			return _play(gameId, false);
 		}
 	};
 });
