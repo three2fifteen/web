@@ -1,19 +1,25 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
-	<h1>My Games</h1>
-	<a href="/game/create">Start new game</a>
-	<ul id="list-games"></ul>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-6">
+				<h3>Games</h3>
+				<a class="btn btn-primary btn-full-width" href="/game/create"> Start new game </a>
+				<ul id="list-games"></ul>
+			</div>
+		</div>
+	</div>
 
 	<!-- Templates used by the javascript application to populate the page with data-->
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
-		<li>
-			<p>
+		<li class="individual-game">
+			<h4>
 				game
 				[[if game.ongoing then game_link with game]]
 				[[if game.open then game_invite_link with game]]
-			</p>
+			</h4>
 			<p>number of players: [[game.current_players_count]] / [[game.number_players]]</p>
 			<ul>
 				[[each game.game_players as player on game_player]]
