@@ -18,12 +18,23 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
-	const _resultMove = (move) => {
+	const _invalidPlay = (message) => {
+		B.$id('confirm-play').setAttribute('disabled', 'disabled');
+		B.$id('play-result').innerHTML = message;
+	};
+
+	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
-			B.$id('play-result').innerHTML = 'This play would give you ' + score + ' points';
-		}).catch((error) => {
-			B.$id('play-result').innerHTML = error;
-		});
+			let message;
+			if (dryRun) {
+				message = 'This play would give you ';
+				B.$id('confirm-play').removeAttribute('disabled');
+			}
+			else {
+				message = 'You scored ';
+			}
+			B.$id('play-result').innerHTML = message + score + ' points';
+		}).catch(_invalidPlay);
 	};
 
 	const _dropToken = (e, callback) => {
@@ -36,16 +47,23 @@ loader.executeModule('gamePageModule',
 		}
 		li.appendChild(token);
 		const move = callback(token, li);
-		_resultMove(move);
+		_resultMove(move, true);
 	};
 
 	const _dropTokenHand = (e) => {
-		_dropToken(e, (token, li) => {
-			return Game.removeToken(
-				gameId,
-				token.id
-			);
-		});
+		e.preventDefault();
+		const token = B.$id(e.dataTransfer.getData('token-id'));
+		B.$id('player-hand').appendChild(token);
+		const move = Game.removeToken(
+			gameId,
+			token.id
+		);
+		if (move) {
+			_resultMove(move, true);
+		}
+		else {
+			_invalidPlay('');
+		}
 	};
 
 	const _dropTokenBoard = (e) => {
@@ -104,13 +122,17 @@ loader.executeModule('gamePageModule',
 					e.dataTransfer.setData('token-id', token.id);
 				});
 			});
-			document.querySelectorAll('#player-hand li').forEach((hand) => {
-				hand.addEventListener('dragover', _tokenOverHand, false);
-				hand.addEventListener('drop', _dropTokenHand, false);
-			});
+			B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
+			B.$id('player-hand').addEventListener('drop', _dropTokenHand);
 			document.querySelectorAll('#board li').forEach((place) => {
 				place.addEventListener('dragover', _tokenOverBoard, false);
 				place.addEventListener('drop', _dropTokenBoard, false);
+			});
+			B.$id('confirm-play').addEventListener('click', (e) => {
+				e.preventDefault();
+				e.preventDefault();
+				const play = Game.play(gameId);
+				_resultMove(play, false);
 			});
 		}
 	};

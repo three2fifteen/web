@@ -15,6 +15,13 @@
 
 		#player-hand {
 			clear: both;
+			width: 100px;
+			height: 33px;
+			border: 1px black solid;
+		}
+
+		#player-hand .token {
+			display: inline-block;
 		}
 
 		.cell {
@@ -31,18 +38,17 @@
 		<ul id="board">
 			[[each board as cell on board_cell]]
 		</ul>
-		<ul id="player-hand">
+		<div id="player-hand">
 			[[each player_hand as token on player_token]]
-		</ul>
+		</div>
 		<div id="play-result"></div>
+		<button id="confirm-play" disabled>Confirm!</button>
 	</script>
 
 	<script type="template" id="player-token">
-		<li>
-			<div class="token" id="player-token-[[token.index]]"data-value="[[token.value]]" draggable="true">
-				[[token.value]]
-			</div>
-		</li>
+		<div class="token" id="player-token-[[token.index]]"data-value="[[token.value]]" draggable="true">
+			[[token.value]]
+		</div>
 	</script>
 
 	<script type="template" id="board-cell">
