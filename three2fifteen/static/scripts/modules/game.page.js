@@ -18,19 +18,23 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
+	const _invalidPlay = (message) => {
+		B.$id('confirm-play').setAttribute('disabled', 'disabled');
+		B.$id('play-result').innerHTML = message;
+	};
+
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
 			let message;
 			if (dryRun) {
 				message = 'This play would give you ';
+				B.$id('confirm-play').removeAttribute('disabled');
 			}
 			else {
 				message = 'You scored ';
 			}
 			B.$id('play-result').innerHTML = message + score + ' points';
-		}).catch((error) => {
-			B.$id('play-result').innerHTML = error;
-		});
+		}).catch(_invalidPlay);
 	};
 
 	const _dropToken = (e, callback) => {
@@ -54,7 +58,12 @@ loader.executeModule('gamePageModule',
 			gameId,
 			token.id
 		);
-		move && _resultMove(move, true);
+		if (move) {
+			_resultMove(move, true);
+		}
+		else {
+			_invalidPlay('');
+		}
 	};
 
 	const _dropTokenBoard = (e) => {
