@@ -2,6 +2,7 @@ loader.addModule('Game',
 'request', 'config', 'auth', 'utils',
 (request, config, auth, utils) => {
 	let _currentPlay = {};
+	const BOARD_WIDTH = 15;
 
 	const _play = (gameId, dryRun) => {
 		const endpoint = dryRun && config.api_turn_check || config.api_turn;
@@ -27,6 +28,12 @@ loader.addModule('Game',
 			game.current_players_count = game.game_players.length;
 			game.ongoing = game.date_started && !game.date_finished;
 			game.open = !game.date_finished && game.current_players_count < game.number_players;
+		},
+		setBoardContent: (board, content) => {
+			for (let token of content) {
+				const index = token.y * BOARD_WIDTH + token.x;
+				board[index].token = token;
+			}
 		},
 		placeToken: (gameId, tokenId, x, y, value) => {
 			_currentPlay[tokenId] = {'value': value, 'x': x, 'y': y};
