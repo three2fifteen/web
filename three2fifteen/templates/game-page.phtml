@@ -45,6 +45,12 @@
 		<button id="confirm-play" disabled>Confirm!</button>
 	</script>
 
+	<script type="template" id="board-token">
+		<div class="token" data-value="[[token.value]]">
+			[[token.value]]
+		</div>
+	</script>
+
 	<script type="template" id="player-token">
 		<div class="token" id="player-token-[[token.index]]" data-value="[[token.value]]" draggable="true">
 			[[token.value]]
@@ -53,6 +59,7 @@
 
 	<script type="template" id="board-cell">
 		<li class="cell cell-[[cell.type]]" data-x="[[cell.x]]" data-y="[[cell.y]]">
+			[[if cell.token then board_token with cell.token]]
 		</li>
 	</script>
 
