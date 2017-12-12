@@ -91,11 +91,13 @@ loader.executeModule('gamePageModule',
 				game_open: {html: B.$id('game-open').innerHTML},
 				game_finished: {html: B.$id('game-finished').innerHTML},
 				player_token: {html: B.$id('player-token').innerHTML},
+				board_token: {html: B.$id('board-token').innerHTML},
 				board_cell: {html: B.$id('board-cell').innerHTML}
 			});
 
 			// Analyse data
 			Game.analyseGame(module.data.game);
+			Game.setBoardContent(module.data.board, module.data.game_content);
 			module.data.player_hand.forEach((token, index) => {
 				module.data.player_hand[index] = {'value': token, 'index': index};
 			});

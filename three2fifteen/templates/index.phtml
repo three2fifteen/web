@@ -30,12 +30,12 @@
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-link">
-		<a href="/game/[[game.id_game]]">Go to game</a>
+		<a href="/game/[[id_game]]">Go to game</a>
 	</script>
 
 	<!-- Template for the link to invite a player to a game -->
 	<script type="template" id="game-invite-link">
-		<span>Invite link: <a href="/game/join/[[game.public_id]]">Copy link</a>
+		<span>Invite link: <a href="/game/join/[[public_id]]">Copy link</a>
 	</script>
 {% endblock %}
 {% block scripts %}
