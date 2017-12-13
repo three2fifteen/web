@@ -43,6 +43,10 @@
 		</div>
 		<div id="play-result"></div>
 		<button id="confirm-play" disabled>Confirm!</button>
+		<div id="scores">
+			Scores:
+			[[each game_content.scores as score on score]]
+		</div>
 	</script>
 
 	<script type="template" id="board-token">
@@ -69,6 +73,12 @@
 
 	<script type="template" id="game-finished">
 		Game finished
+	</script>
+
+	<script type="template" id="template-score">
+		<div class="score">
+			[[score.player]]: [[score.score]]
+		</div>
 	</script>
 {% endblock %}
 {% block scripts %}
