@@ -97,7 +97,10 @@ loader.executeModule('gamePageModule',
 
 			// Analyse data
 			Game.analyseGame(module.data.game);
-			Game.setBoardContent(module.data.board, module.data.game_content);
+			Game.setBoardContent(
+				module.data.board,
+				module.data.game_content.tokens
+			);
 			module.data.player_hand.forEach((token, index) => {
 				module.data.player_hand[index] = {'value': token, 'index': index};
 			});
