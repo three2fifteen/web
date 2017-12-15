@@ -29,6 +29,11 @@ loader.addModule('Game',
 			game.ongoing = game.date_started && !game.date_finished;
 			game.open = !game.date_finished && game.current_players_count < game.number_players;
 		},
+		setPlayerScores: (game, content) => {
+			for (let player of game.game_players) {
+				player.score = content.scores[player.id_user].score;
+			}
+		},
 		setBoardContent: (board, content) => {
 			for (let token of content) {
 				const index = token.y * BOARD_WIDTH + token.x;
