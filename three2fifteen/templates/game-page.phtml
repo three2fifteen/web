@@ -78,7 +78,17 @@
 	<script type="template" id="template-player-score">
 		<div class="score">
 			[[player.id_user]]: [[player.score]]
+			[[if player.is_game_creator then game_creator]]
+			[[if player.is_turn then player_turn]]
 		</div>
+	</script>
+
+	<script type="template" id="template-game-creator">
+		This is displayed for the game creator
+	</script>
+
+	<script type="template" id="template-player-turn">
+		This is displayed for the current player to play
 	</script>
 {% endblock %}
 {% block scripts %}

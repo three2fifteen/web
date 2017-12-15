@@ -94,6 +94,8 @@ loader.executeModule('gamePageModule',
 				board_token: {html: B.$id('board-token').innerHTML},
 				board_cell: {html: B.$id('board-cell').innerHTML},
 				player_score: {html: B.$id('template-player-score').innerHTML},
+				game_creator: {html: B.$id('template-game-creator').innerHTML},
+				player_turn: {html: B.$id('template-player-turn').innerHTML}
 			});
 
 			// Analyse data
