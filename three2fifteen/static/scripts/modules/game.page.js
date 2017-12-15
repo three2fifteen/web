@@ -98,6 +98,7 @@ loader.executeModule('gamePageModule',
 
 			// Analyse data
 			Game.analyseGame(module.data.game);
+			Game.setPlayerScores(module.data.game, module.data.game_content);
 			Game.setBoardContent(
 				module.data.board,
 				module.data.game_content.tokens
