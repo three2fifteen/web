@@ -93,7 +93,7 @@ loader.executeModule('gamePageModule',
 				player_token: {html: B.$id('player-token').innerHTML},
 				board_token: {html: B.$id('board-token').innerHTML},
 				board_cell: {html: B.$id('board-cell').innerHTML},
-				score: {html: B.$id('template-score').innerHTML}
+				player_score: {html: B.$id('template-player-score').innerHTML},
 			});
 
 			// Analyse data

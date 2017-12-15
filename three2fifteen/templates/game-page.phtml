@@ -43,9 +43,9 @@
 		</div>
 		<div id="play-result"></div>
 		<button id="confirm-play" disabled>Confirm!</button>
-		<div id="scores">
+		<div id="player-scores">
 			Scores:
-			[[each game_content.scores as score on score]]
+			[[each game.game_players as player on player_score]]
 		</div>
 	</script>
 
@@ -75,9 +75,9 @@
 		Game finished
 	</script>
 
-	<script type="template" id="template-score">
+	<script type="template" id="template-player-score">
 		<div class="score">
-			[[score.player]]: [[score.score]]
+			[[player.id_user]]: [[player.score]]
 		</div>
 	</script>
 {% endblock %}
