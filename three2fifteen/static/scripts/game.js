@@ -31,7 +31,12 @@ loader.addModule('Game',
 		},
 		setPlayerScores: (game, content) => {
 			for (let player of game.game_players) {
-				player.score = content.scores[player.id_user].score;
+				if (!content.scores[player.id_user]) {
+					player.score = 0;
+				}
+				else {
+					player.score = content.scores[player.id_user].score;
+				}
 			}
 		},
 		setBoardContent: (board, content) => {
