@@ -24,7 +24,9 @@
 	<!-- Template to represent a user of a game -->
 	<script type="template" id="game-player">
 		<li>
-			Player: [[player]]
+			Player: [[player.id_user]]
+			[[if player.is_game_creator then game_creator]]
+			[[if player.is_turn then player_turn]]
 		</li>
 	</script>
 
@@ -37,6 +39,7 @@
 	<script type="template" id="game-invite-link">
 		<span>Invite link: <a href="/game/join/[[public_id]]">Copy link</a>
 	</script>
+	{% include "game-player-info.phtml" %}
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts/game.js') }}"></script>

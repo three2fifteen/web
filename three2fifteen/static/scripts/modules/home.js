@@ -10,7 +10,9 @@ loader.executeModule('homeModule',
 				game: {html: B.$id('game-instance').innerHTML},
 				game_player: {html: B.$id('game-player').innerHTML},
 				game_link: {html: B.$id('game-link').innerHTML},
-				game_invite_link: {html: B.$id('game-invite-link').innerHTML}
+				game_invite_link: {html: B.$id('game-invite-link').innerHTML},
+				game_creator: {html: B.$id('template-game-creator').innerHTML},
+				player_turn: {html: B.$id('template-player-turn').innerHTML}
 			});
 			module.data.games.forEach((game) => {
 				Game.analyseGame(game);
