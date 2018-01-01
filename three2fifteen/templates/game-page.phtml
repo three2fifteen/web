@@ -1,37 +1,15 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
-	<style type="text/css">
-		.token {
-			width: 28px;
-			height: 28px;
-			background-color: rgba(255,255,255,1);
-		}
 
-		#board {
-			list-style: none;
-			width: 460px;
-		}
-
-		#player-hand {
-			clear: both;
-			width: 100px;
-			height: 33px;
-			border: 1px black solid;
-		}
-
-		#player-hand .token {
-			display: inline-block;
-		}
-
-		.cell {
-			float: left;
-			border: 1px black solid;
-			width: 28px;
-			height: 28px;
-		}
-	</style>
-	<div id="game-section"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="game-section">
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script type="template" id="game-ongoing">
 		Game ongoing
