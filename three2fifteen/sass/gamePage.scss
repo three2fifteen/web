@@ -1,0 +1,127 @@
+.token {
+  width: 32px;
+  height: 32px;
+  color: $white;
+  background-color: $secondary-color;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 21px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.24);
+  z-index: 1;
+  position: absolute;
+  cursor: grab;
+}
+
+#board {
+  list-style: none;
+  width: 580px;
+}
+
+#player-hand {
+  clear: both;
+  width: 100%;
+  height: 33px;
+  // border: 1px black solid;
+}
+
+#player-hand .token {
+  display: inline-block;
+  position: relative;
+}
+
+.cell {
+  background-color: $light-gray;
+  float: left;
+  border-radius: 2px;
+  margin: 2px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  position: relative;
+}
+
+.cell::after {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.cell[data-x='7'][data-y='0'],
+.cell[data-x='7'][data-y='14'],
+.cell[data-x='0'][data-y='7'],
+.cell[data-x='14'][data-y='7'],
+.cell[data-x='1'][data-y='1'],
+.cell[data-x='13'][data-y='1'],
+.cell[data-x='1'][data-y='13'],
+.cell[data-x='13'][data-y='13']{
+  background-color: $light-purple;
+}
+
+.cell[data-x='7'][data-y='0']::after,
+.cell[data-x='7'][data-y='14']::after,
+.cell[data-x='0'][data-y='7']::after,
+.cell[data-x='14'][data-y='7']::after,
+.cell[data-x='1'][data-y='1']::after,
+.cell[data-x='13'][data-y='1']::after,
+.cell[data-x='1'][data-y='13']::after,
+.cell[data-x='13'][data-y='13']::after {
+  font-family: 'Material Icons';
+  content: '\e042';
+}
+
+
+
+.cell[data-x='7'][data-y='7'],
+.cell[data-x='4'][data-y='1'],
+.cell[data-x='10'][data-y='1'],
+.cell[data-x='4'][data-y='13'],
+.cell[data-x='10'][data-y='13'],
+.cell[data-x='1'][data-y='4'],
+.cell[data-x='1'][data-y='10'],
+.cell[data-x='13'][data-y='4'],
+.cell[data-x='13'][data-y='10'] {
+  background-color: $light-blue;
+}
+
+// .cell[data-x='7'][data-y='7']::after,
+.cell[data-x='4'][data-y='1']::after,
+.cell[data-x='10'][data-y='1']::after,
+.cell[data-x='4'][data-y='13']::after,
+.cell[data-x='10'][data-y='13']::after,
+.cell[data-x='1'][data-y='4']::after,
+.cell[data-x='1'][data-y='10']::after,
+.cell[data-x='13'][data-y='4']::after,
+.cell[data-x='13'][data-y='10']::after {
+  content: 'x3';
+}
+
+.cell[data-x='7'][data-y='7']::after {
+  font-family: 'Material Icons';
+  content: '\e838';
+}
+
+.cell[data-x='7'][data-y='3'],
+.cell[data-x='4'][data-y='4'],
+.cell[data-x='10'][data-y='4'],
+.cell[data-x='4'][data-y='10'],
+.cell[data-x='10'][data-y='10'],
+.cell[data-x='3'][data-y='7'],
+.cell[data-x='11'][data-y='7'],
+.cell[data-x='7'][data-y='11'] {
+  background-color: $light-red;
+}
+
+.cell[data-x='7'][data-y='3']::after,
+.cell[data-x='4'][data-y='4']::after,
+.cell[data-x='10'][data-y='4']::after,
+.cell[data-x='4'][data-y='10']::after,
+.cell[data-x='10'][data-y='10']::after,
+.cell[data-x='3'][data-y='7']::after,
+.cell[data-x='11'][data-y='7']::after,
+.cell[data-x='7'][data-y='11']::after {
+  content: 'x2'
+}
