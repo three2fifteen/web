@@ -77,7 +77,7 @@
 
 	<script type="template" id="template-player-score">
 		<div class="score">
-			[[player.id_user]]: [[player.score]]
+			<span id="player-[[player.id_user]]">[[player.id_user]]</span>: [[player.score]]
 			[[if player.is_game_creator then game_creator]]
 			[[if player.is_turn then player_turn]]
 		</div>

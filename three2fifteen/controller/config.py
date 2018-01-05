@@ -15,5 +15,6 @@ class ConfigController(object):
             'api_get_game_content': self.config['API_GET_GAME_CONTENT'],
             'api_get_hand': self.config['API_GET_HAND'],
             'api_turn_check': self.config['API_TURN_CHECK'],
-            'api_turn': self.config['API_TURN']
+            'api_turn': self.config['API_TURN'],
+            'api_get_player_names': self.config['API_GET_PLAYER_NAMES']
         }
