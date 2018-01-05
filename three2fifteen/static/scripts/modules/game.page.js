@@ -78,6 +78,12 @@ loader.executeModule('gamePageModule',
 		});
 	};
 
+	const _displayPlayerNames = (names) => {
+		for (let player in names) {
+			B.$id('player-' + player).innerHTML = names[player];
+		}
+	};
+
 	let module = {
 		'dataUrls': [
 			{'url': config.api_get_board, 'name': 'board'},
@@ -124,6 +130,9 @@ loader.executeModule('gamePageModule',
 				template,
 				module.data
 			);
+			Game.setPlayerNames(module.data.game).then((names) => {
+				_displayPlayerNames(names);
+			});
 
 			// Set events
 			document.querySelectorAll('#player-hand .token').forEach((token) => {

@@ -14,10 +14,15 @@ loader.executeModule('homeModule',
 				game_creator: {html: B.$id('template-game-creator').innerHTML},
 				player_turn: {html: B.$id('template-player-turn').innerHTML}
 			});
-			module.data.games.forEach((game) => {
-				Game.analyseGame(game);
-				const gameHTML = B.Template.compile('game', {game: game});
-				B.$id('list-games').innerHTML += gameHTML;
+			Game.setPlayerNames(module.data.games).then((players) => {
+				module.data.games.forEach((game) => {
+					Game.analyseGame(game);
+					game.game_players.forEach((player) => {
+						player.name = players[player.id_user];
+					});
+					const gameHTML = B.Template.compile('game', {game: game});
+					B.$id('list-games').innerHTML += gameHTML;
+				});
 			});
 		}
 	};
