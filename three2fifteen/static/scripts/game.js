@@ -39,6 +39,34 @@ loader.addModule('Game',
 				}
 			}
 		},
+		setPlayerNames: (game) => {
+			let ids = new Set();
+			const _addPlayersGame = (game) => {
+				for (let player of game.game_players) {
+					ids.add(player.id_user);
+				}
+			};
+			if (game.game_players) {
+				_addPlayersGame(game);
+			}
+			else {
+				for (let g of game) {
+					_addPlayersGame(g);
+				}
+			}
+			return new Promise((resolve, reject) => {
+				request.get(
+					utils.format(
+						config.api_host + config.api_get_player_names,
+						[[...ids].join()]
+					),
+					auth.getHeader(),
+					(statusCode, body) => {
+						resolve(JSON.parse(body));
+					}
+				);
+			});
+		},
 		setBoardContent: (board, content) => {
 			for (let token of content) {
 				const index = token.y * BOARD_WIDTH + token.x;
