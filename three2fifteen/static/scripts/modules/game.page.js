@@ -10,11 +10,15 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
+	let _hoveredCell = null;
 	const _tokenOverHand = (e) => {
 		e.preventDefault();
 	}
 
 	const _tokenOverBoard = (e) => {
+		B.removeClass(_hoveredCell, 'hovered');
+		_hoveredCell = e.target;
+		B.addClass(_hoveredCell, 'hovered');
 		e.preventDefault();
 	}
 
@@ -48,6 +52,8 @@ loader.executeModule('gamePageModule',
 		li.appendChild(token);
 		const move = callback(token, li);
 		_resultMove(move, true);
+		B.removeClass(_hoveredCell, 'hovered');
+		_hoveredCell = e.target;
 	};
 
 	const _dropTokenHand = (e) => {
