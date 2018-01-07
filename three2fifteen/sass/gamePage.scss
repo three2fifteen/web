@@ -167,4 +167,41 @@
 
 .score{
     background-color: $light-gray;
+    margin: 8px 0;
+    padding: 8px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+
+    .player-info{
+      display: flex;
+      align-items:center;
+      .player-turn{
+        color: $blue;
+      }
+    }
+
+    .player-avatar{
+      width: 64px;
+      height: 64px;
+      margin: 0 8px;
+      background-size: contain;
+    }
+
+    .player-score{
+      font-weight: 600;
+    }
+
+    #player-1-image{
+      background-image: url('../images/Avatar 1.png');
+    }
+    #player-2-image{
+      background-image: url('../images/Avatar 2.png');
+    }
+    #player-3-image{
+      background-image: url('../images/Avatar 3.png');
+    }
+    #player-4-image{
+      background-image: url('../images/Avatar 4.png');
+    }
 }
