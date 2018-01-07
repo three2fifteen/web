@@ -51,6 +51,8 @@
   display: inline-block;
   position: relative;
   margin: 2px;
+  width: 32px;
+  height: 32px;
 }
 
 #confirm-play{
@@ -71,6 +73,10 @@
   position: relative;
 }
 
+.cell.hovered{
+  background-color: red!important;
+}
+
 .cell::after {
   width: 32px;
   height: 32px;
@@ -87,7 +93,7 @@
 .cell[data-x='13'][data-y='1'],
 .cell[data-x='1'][data-y='13'],
 .cell[data-x='13'][data-y='13']{
-  background-color: $light-purple;
+  // background-color: $light-purple;
 }
 
 .cell[data-x='7'][data-y='0']::after,
@@ -99,12 +105,12 @@
 .cell[data-x='1'][data-y='13']::after,
 .cell[data-x='13'][data-y='13']::after {
   font-family: 'Material Icons';
-  content: '\e042';
+  // content: '\e042';
 }
 
 
 
-.cell[data-x='7'][data-y='7'],
+
 .cell[data-x='4'][data-y='1'],
 .cell[data-x='10'][data-y='1'],
 .cell[data-x='4'][data-y='13'],
@@ -126,6 +132,10 @@
 .cell[data-x='13'][data-y='4']::after,
 .cell[data-x='13'][data-y='10']::after {
   content: 'x3';
+}
+
+.cell[data-x='7'][data-y='7']{
+  background-color: $light-red;
 }
 
 .cell[data-x='7'][data-y='7']::after {
@@ -153,4 +163,8 @@
 .cell[data-x='11'][data-y='7']::after,
 .cell[data-x='7'][data-y='11']::after {
   content: 'x2'
+}
+
+.score{
+    background-color: $light-gray;
 }
