@@ -21,44 +21,51 @@
   border: 1px solid #eeeeee;
 }
 
-#player-scores{
-  border-left: 1px solid #eeeeee;
-}
 
-#board {
-  list-style: none;
-  width: 540px;
-  padding: 0px;
-  margin: 24px auto;
-}
+#game-play-section{
+  #board {
+    list-style: none;
+    width: 540px;
+    padding: 0px;
+    margin: 24px auto 0px;
+    &::after{
+      content: '';
+      clear: both;
+      display: block;
+    }
+  }
 
-#board::after{
-  content: '';
-  clear: both;
-  display: block;
-}
+  #player-hand {
+    clear: both;
+    text-align: center;
+    height: 56px;
+    margin: 0 auto;
+    width: 100%;
+    // background: $light-yellow;
+    // border: 1px black solid;
+    .token {
+      display: inline-block;
+      position: relative;
+      margin: 2px;
+      width: 32px;
+      height: 32px;
+    }
+  }
 
-#player-hand {
-  clear: both;
-  width: 100%;
-  height: 33px;
-  margin: 16px 0;
-  text-align: center;
-  // border: 1px black solid;
-}
-
-#player-hand .token {
-  display: inline-block;
-  position: relative;
-  margin: 2px;
-  width: 32px;
-  height: 32px;
+  .game-info{
+    margin-top:16px;
+    height: 40px;
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 #confirm-play{
   width: 540px;
   display: block;
-  margin: 24px auto 32px;
+  margin: 0 auto 32px;
 }
 
 .cell {
@@ -165,7 +172,31 @@
   content: 'x2'
 }
 
-.score{
+
+#player-scores{
+  border-left: 1px solid #eeeeee;
+
+  h3{
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .score{
+    &#score-player-1{
+      border-left: 4px solid $primary-color;
+    }
+
+    &#score-player-2{
+      border-left: 4px solid $secondary-color;
+    }
+
+    &#score-player-3{
+      border-left: 4px solid $yellow;
+    }
+
+    &#score-player-4{
+      border-left: 4px solid $purple;
+    }
+
     background-color: $light-gray;
     margin: 8px 0;
     padding: 8px;
@@ -204,4 +235,10 @@
     #player-4-image{
       background-image: url('../images/Avatar 4.png');
     }
+  }
 }
+
+// #play-result{
+//   height: 48px;
+//   margin-top: 24px;
+// }
