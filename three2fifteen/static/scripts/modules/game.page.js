@@ -35,9 +35,9 @@ loader.executeModule('gamePageModule',
 				B.$id('confirm-play').removeAttribute('disabled');
 			}
 			else {
-				message = 'You scored ';
+				message = '0';
 			}
-			B.$id('play-result').innerHTML = message + score + ' points';
+			B.$id('potential-score').innerHTML = score ;
 		}).catch(_invalidPlay);
 	};
 
