@@ -9,19 +9,23 @@
 	</div>
 
 	<script type="template" id="game-ongoing">
-		<div class="col-sm-8">
+		<div id="game-play-section" class="col-sm-8">
+			<div class="game-info">
+
+				<h4>Tokens remaining: [[game.size_bag]]</h4>
+				<h4>Potential score: <span id="potential-score"></span></h4>
+			</div>
+
 			<ul id="board">
 				[[each board as cell on board_cell]]
 			</ul>
 			<div id="player-hand">
 				[[each player_hand as token on player_token]]
 			</div>
-			<div id="play-result"></div>
 			<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
 		</div>
 		<div id="player-scores" class="col-sm-4">
-			<div>[[game.size_bag]] tokens remaining in the bag</div>
-			Scores:
+			<h3>Scores:</h3>
 			[[each game.game_players as player on player_score]]
 		</div>
 	</script>
@@ -53,7 +57,7 @@
 	</script>
 
 	<script type="template" id="template-player-score">
-		<div class="score">
+		<div class="score" id="score-player-[[player.id_user]]">
 			<div class="player-info">
 				[[if player.is_turn then player_turn]]
 				<div class="player-avatar" id="player-[[player.id_user]]-image"></div>
