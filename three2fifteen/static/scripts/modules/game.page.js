@@ -24,7 +24,7 @@ loader.executeModule('gamePageModule',
 
 	const _invalidPlay = (message) => {
 		B.$id('confirm-play').setAttribute('disabled', 'disabled');
-		B.$id('play-result').innerHTML = message;
+		B.$id('alert-container').innerHTML = '<div class="alert alert-danger" role="alert">'+message+'</div>';
 	};
 
 	const _resultMove = (move, dryRun) => {
