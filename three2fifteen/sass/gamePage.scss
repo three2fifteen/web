@@ -15,9 +15,12 @@
   cursor: -webkit-grab;
 }
 
+#alert-container{
+  margin: 16px 0;
+}
 #game-section{
   background: $white;
-  margin: 24px 0;
+  margin: 16px 0;
   border: 1px solid #eeeeee;
 }
 
