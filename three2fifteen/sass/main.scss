@@ -1,5 +1,8 @@
 @import "config";
 @import "gamelist";
+@import "gamePage";
+@import "createGame";
+
 *,
 *::after,
 *::before {
@@ -24,6 +27,7 @@ h2{
 }
 
 h3{
+	margin: 24px 0 12px;
 	font: $header;
 }
 
@@ -71,4 +75,8 @@ h5{
 
 .btn:hover{
 	cursor: pointer;
+}
+
+.hidden{
+	display: none!important;
 }

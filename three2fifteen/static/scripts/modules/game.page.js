@@ -10,31 +10,52 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
+	let _hoveredCell = null;
 	const _tokenOverHand = (e) => {
 		e.preventDefault();
 	}
 
+	const _postMove = (valid, message, enableConfirm) => {
+		let cpNode = B.$id('confirm-play'),
+			alertNode = B.$id('alert-container');
+		alertNode.innerHTML = message;
+		if (message) {
+			B.removeClass(alertNode, 'hidden');
+		}
+		else {
+			B.addClass(alertNode, 'hidden');
+		}
+
+		if (valid) {
+			B.addClass(alertNode, 'alert-success');
+			B.removeClass(alertNode, 'alert-danger');
+		}
+		else {
+			B.removeClass(alertNode, 'alert-success');
+			B.addClass(alertNode, 'alert-danger');
+		}
+
+		if (enableConfirm) {
+			cpNode.removeAttribute('disabled');
+		}
+		else {
+			cpNode.setAttribute('disabled', 'disabled');
+		}
+	};
+
 	const _tokenOverBoard = (e) => {
+		B.removeClass(_hoveredCell, 'hovered');
+		_hoveredCell = e.target;
+		B.addClass(_hoveredCell, 'hovered');
 		e.preventDefault();
 	}
 
-	const _invalidPlay = (message) => {
-		B.$id('confirm-play').setAttribute('disabled', 'disabled');
-		B.$id('play-result').innerHTML = message;
-	};
-
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
-			let message;
-			if (dryRun) {
-				message = 'This play would give you ';
-				B.$id('confirm-play').removeAttribute('disabled');
-			}
-			else {
-				message = 'You scored ';
-			}
-			B.$id('play-result').innerHTML = message + score + ' points';
-		}).catch(_invalidPlay);
+			_postMove(true, score, dryRun);
+		}).catch((message) => {
+			_postMove(false, message, false);
+		});
 	};
 
 	const _dropToken = (e, callback) => {
@@ -48,6 +69,8 @@ loader.executeModule('gamePageModule',
 		li.appendChild(token);
 		const move = callback(token, li);
 		_resultMove(move, true);
+		B.removeClass(_hoveredCell, 'hovered');
+		_hoveredCell = e.target;
 	};
 
 	const _dropTokenHand = (e) => {
@@ -62,8 +85,9 @@ loader.executeModule('gamePageModule',
 			_resultMove(move, true);
 		}
 		else {
-			_invalidPlay('');
+			_postMove(true, '', false);
 		}
+		B.removeClass(_hoveredCell, 'hovered');
 	};
 
 	const _dropTokenBoard = (e) => {
