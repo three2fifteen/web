@@ -29,14 +29,6 @@ loader.executeModule('gamePageModule',
 
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
-			let message;
-			if (dryRun) {
-				message = 'This play would give you ';
-				B.$id('confirm-play').removeAttribute('disabled');
-			}
-			else {
-				message = '0';
-			}
 			B.$id('potential-score').innerHTML = score ;
 		}).catch(_invalidPlay);
 	};
