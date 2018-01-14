@@ -87,6 +87,7 @@ loader.executeModule('gamePageModule',
 		else {
 			_postMove(true, '', false);
 		}
+		B.removeClass(_hoveredCell, 'hovered');
 	};
 
 	const _dropTokenBoard = (e) => {
