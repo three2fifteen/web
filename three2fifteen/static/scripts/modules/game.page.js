@@ -15,6 +15,34 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
+	const _postMove = (valid, message, enableConfirm) => {
+		let cpNode = B.$id('confirm-play'),
+			alertNode = B.$id('alert-container');
+		alertNode.innerHTML = message;
+		if (message) {
+			B.removeClass(alertNode, 'hidden');
+		}
+		else {
+			B.addClass(alertNode, 'hidden');
+		}
+
+		if (valid) {
+			B.addClass(alertNode, 'alert-success');
+			B.removeClass(alertNode, 'alert-danger');
+		}
+		else {
+			B.removeClass(alertNode, 'alert-success');
+			B.addClass(alertNode, 'alert-danger');
+		}
+
+		if (enableConfirm) {
+			cpNode.removeAttribute('disabled');
+		}
+		else {
+			cpNode.setAttribute('disabled', 'disabled');
+		}
+	};
+
 	const _tokenOverBoard = (e) => {
 		B.removeClass(_hoveredCell, 'hovered');
 		_hoveredCell = e.target;
@@ -22,15 +50,12 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
-	const _invalidPlay = (message) => {
-		B.$id('confirm-play').setAttribute('disabled', 'disabled');
-		B.$id('alert-container').innerHTML = message;
-	};
-
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
-			B.$id('potential-score').innerHTML = score ;
-		}).catch(_invalidPlay);
+			_postMove(true, score, dryRun);
+		}).catch((message) => {
+			_postMove(false, message, false);
+		});
 	};
 
 	const _dropToken = (e, callback) => {
@@ -60,7 +85,7 @@ loader.executeModule('gamePageModule',
 			_resultMove(move, true);
 		}
 		else {
-			_invalidPlay('');
+			_postMove(true, '', false);
 		}
 	};
 
