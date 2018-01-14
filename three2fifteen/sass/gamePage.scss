@@ -85,7 +85,7 @@
 }
 
 .cell.hovered{
-  background-color: red!important;
+  background-color: $primary-color!important;
 }
 
 .cell::after {
