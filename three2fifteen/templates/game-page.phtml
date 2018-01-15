@@ -3,7 +3,7 @@
 	{% include "header.phtml" %}
 
 	<div class="container">
-		<div id="game-section" class="row">
+		<div id="game-section" class="row justify-content-center">
 
 		</div>
 	</div>
@@ -52,7 +52,14 @@
 	</script>
 
 	<script type="template" id="game-finished">
-		Game finished
+		<div id="game-finished-section" class="col-sm-4">
+			<h1>
+				 YOU WIN
+			</h1>
+			<div class="image winner"></div>
+			<a href='/' class="btn btn-primary">Go Back to Game page</a>
+		</div>
+
 	</script>
 
 	<script type="template" id="template-player-score">
