@@ -25,28 +25,37 @@ loader.addModule('Game',
 
 	return {
 		analyseGame: (game) => {
-			game.current_players_count = game.game_players.length;
+			game.current_players_count = game.players.length;
 			game.ongoing = game.date_started && !game.date_finished;
 			game.open = !game.date_finished && game.current_players_count < game.number_players;
 		},
 		setPlayerScores: (game, content) => {
-			for (let player of game.game_players) {
+			let maxScore = 0, winner = null;
+			for (let player of game.players) {
 				if (!content.scores[player.id_user]) {
 					player.score = 0;
 				}
 				else {
 					player.score = content.scores[player.id_user].score;
+					if (player.score > maxScore) {
+						maxScore = player.score;
+						winner = player.id_user;
+					}
 				}
+			}
+
+			if (game.date_finished) {
+				game.winner = winner;
 			}
 		},
 		setPlayerNames: (game) => {
 			let ids = new Set();
 			const _addPlayersGame = (game) => {
-				for (let player of game.game_players) {
+				for (let player of game.players) {
 					ids.add(player.id_user);
 				}
 			};
-			if (game.game_players) {
+			if (game.players) {
 				_addPlayersGame(game);
 			}
 			else {
@@ -62,7 +71,11 @@ loader.addModule('Game',
 					),
 					auth.getHeader(),
 					(statusCode, body) => {
-						resolve(JSON.parse(body));
+						body = JSON.parse(body);
+						for (let user_id in body) {
+							game.players[user_id]['name'] = body[user_id];
+						}
+						resolve();
 					}
 				);
 			});

@@ -21,7 +21,7 @@
 		</div>
 		<div id="player-scores" class="col-sm-4">
 			<h3>Scores:</h3>
-			[[each game.game_players as player on player_score]]
+			[[each game.players as player on player_score]]
 			<div class="game-info">
 				<h4>Tokens remaining: [[game.size_bag]]</h4>
 				<div id="alert-container" class="hidden alert" role="alert"></div>
@@ -56,6 +56,9 @@
 			<h1>
 				 YOU WIN
 			</h1>
+			<div id="player-scores" class="col-sm-4">
+				[[each game.players as player on player_score]]
+			</div>
 			<div class="image winner"></div>
 			<a href='/' class="btn btn-primary">Go Back to Game page</a>
 		</div>
