@@ -142,6 +142,7 @@ loader.executeModule('gamePageModule',
 
 			// Render page
 			let template;
+			let gameOngoing = false;
 			if (module.data.game.open) {
 				template = 'game_open';
 			}
@@ -150,33 +151,39 @@ loader.executeModule('gamePageModule',
 			}
 			else {
 				template = 'game_ongoing';
+				gameOngoing = true;
 			}
 			B.$id('game-section').innerHTML = B.Template.compile(
 				template,
 				module.data
 			);
-			Game.setPlayerNames(module.data.game).then((names) => {
-				_displayPlayerNames(names);
-			});
 
-			// Set events
-			document.querySelectorAll('#player-hand .token').forEach((token) => {
-				token.addEventListener('dragstart', (e) => {
-					e.dataTransfer.setData('token-id', token.id);
+			if (!module.data.game.open) {
+				Game.setPlayerNames(module.data.game).then((names) => {
+					_displayPlayerNames(names);
 				});
-			});
-			B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
-			B.$id('player-hand').addEventListener('drop', _dropTokenHand);
-			document.querySelectorAll('#board li').forEach((place) => {
-				place.addEventListener('dragover', _tokenOverBoard, false);
-				place.addEventListener('drop', _dropTokenBoard, false);
-			});
-			B.$id('confirm-play').addEventListener('click', (e) => {
-				e.preventDefault();
-				e.preventDefault();
-				const play = Game.play(gameId);
-				_resultMove(play, false);
-			});
+			}
+
+			if (gameOngoing) {
+				// Set events
+				document.querySelectorAll('#player-hand .token').forEach((token) => {
+					token.addEventListener('dragstart', (e) => {
+						e.dataTransfer.setData('token-id', token.id);
+					});
+				});
+				B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
+				B.$id('player-hand').addEventListener('drop', _dropTokenHand);
+				document.querySelectorAll('#board li').forEach((place) => {
+					place.addEventListener('dragover', _tokenOverBoard, false);
+					place.addEventListener('drop', _dropTokenBoard, false);
+				});
+				B.$id('confirm-play').addEventListener('click', (e) => {
+					e.preventDefault();
+					e.preventDefault();
+					const play = Game.play(gameId);
+					_resultMove(play, false);
+				});
+			}
 		}
 	};
 	app.addModule(module);
