@@ -25,12 +25,12 @@ loader.addModule('Game',
 
 	return {
 		analyseGame: (game) => {
-			game.current_players_count = game.game_players.length;
+			game.current_players_count = game.players.length;
 			game.ongoing = game.date_started && !game.date_finished;
 			game.open = !game.date_finished && game.current_players_count < game.number_players;
 		},
 		setPlayerScores: (game, content) => {
-			for (let player of game.game_players) {
+			for (let player of game.players) {
 				if (!content.scores[player.id_user]) {
 					player.score = 0;
 				}
@@ -42,11 +42,11 @@ loader.addModule('Game',
 		setPlayerNames: (game) => {
 			let ids = new Set();
 			const _addPlayersGame = (game) => {
-				for (let player of game.game_players) {
+				for (let player of game.players) {
 					ids.add(player.id_user);
 				}
 			};
-			if (game.game_players) {
+			if (game.players) {
 				_addPlayersGame(game);
 			}
 			else {
