@@ -102,9 +102,9 @@ loader.executeModule('gamePageModule',
 		});
 	};
 
-	const _displayPlayerNames = (names) => {
-		for (let player in names) {
-			B.$id('player-' + player).innerHTML = names[player];
+	const _displayPlayerNames = () => {
+		for (let user_id in module.data.game.players) {
+			B.$id('player-' + user_id).innerHTML = module.data.game.players[user_id].name;
 		}
 	};
 

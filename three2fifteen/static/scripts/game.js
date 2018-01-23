@@ -71,7 +71,11 @@ loader.addModule('Game',
 					),
 					auth.getHeader(),
 					(statusCode, body) => {
-						resolve(JSON.parse(body));
+						body = JSON.parse(body);
+						for (let user_id in body) {
+							game.players[user_id]['name'] = body[user_id];
+						}
+						resolve();
 					}
 				);
 			});
