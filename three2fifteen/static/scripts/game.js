@@ -56,6 +56,12 @@ loader.addModule('Game',
 					ids.add(player.id_user);
 				}
 			};
+
+			const _setNames = (game, names) => {
+				for (let user_id in game.players) {
+					game.players[user_id].name = names[user_id];
+				}
+			};
 			if (game.players) {
 				_addPlayersGame(game);
 			}
@@ -73,8 +79,13 @@ loader.addModule('Game',
 					auth.getHeader(),
 					(statusCode, body) => {
 						body = JSON.parse(body);
-						for (let user_id in body) {
-							game.players[user_id]['name'] = body[user_id];
+						if (game.players) {
+							_setNames(game, body);
+						}
+						else {
+							for (let g of game) {
+								_setNames(g, body);
+							}
 						}
 						resolve();
 					}
