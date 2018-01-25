@@ -154,7 +154,8 @@ loader.executeModule('gamePageModule',
 				board_cell: {html: B.$id('board-cell').innerHTML},
 				player_score: {html: B.$id('template-player-score').innerHTML},
 				game_creator: {html: B.$id('template-game-creator').innerHTML},
-				player_turn: {html: B.$id('template-player-turn').innerHTML}
+				player_turn: {html: B.$id('template-player-turn').innerHTML},
+				winner_token: {html: B.$id('winner-token').innerHTML}
 			});
 
 			const gameOpen = module.data.game.players.length < module.data.game.number_players;

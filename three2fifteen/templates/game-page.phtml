@@ -54,15 +54,18 @@
 	<script type="template" id="game-finished">
 		<div id="game-finished-section" class="col-sm-4">
 			<h1>
-				 YOU WIN
+				[[game.winner.name]] won!
 			</h1>
 			<div id="player-scores" class="col-sm-4">
 				[[each game.players as player on player_score]]
 			</div>
-			<div class="image winner"></div>
+			[[if game.current_is_winner then winner_token]]
 			<a href='/' class="btn btn-primary">Go Back to Game page</a>
 		</div>
+	</script>
 
+	<script type="template" id="winner-token">
+		<div class="image winner"></div>
 	</script>
 
 	<script type="template" id="template-player-score">
