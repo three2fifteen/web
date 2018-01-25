@@ -44,7 +44,8 @@ loader.addModule('Game',
 			}
 
 			if (game.date_finished) {
-				game.winner = winner;
+				game.winner = game.players[winner];
+				game.current_is_winner = game.players[winner].is_current;
 			}
 		},
 		setPlayerNames: (game) => {
