@@ -102,10 +102,39 @@ loader.executeModule('gamePageModule',
 		});
 	};
 
-	const _displayPlayerNames = () => {
-		for (let user_id in module.data.game.players) {
-			B.$id('player-' + user_id).innerHTML = module.data.game.players[user_id].name;
-		}
+	const _prepareGame = (module) => {
+		// Analyse data
+		Game.analyseGame(module.data.game);
+		Game.setPlayerScores(module.data.game, module.data.game_content);
+		module.data.game.size_bag = module.data.game_content.size_bag;
+		Game.setBoardContent(
+			module.data.board,
+			module.data.game_content.tokens
+		);
+		module.data.player_hand.forEach((token, index) => {
+			module.data.player_hand[index] = {'value': token, 'index': index};
+		});
+	};
+
+	const _setEvents = () => {
+		// Set events
+		document.querySelectorAll('#player-hand .token').forEach((token) => {
+			token.addEventListener('dragstart', (e) => {
+				e.dataTransfer.setData('token-id', token.id);
+			});
+		});
+		B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
+		B.$id('player-hand').addEventListener('drop', _dropTokenHand);
+		document.querySelectorAll('#board li').forEach((place) => {
+			place.addEventListener('dragover', _tokenOverBoard, false);
+			place.addEventListener('drop', _dropTokenBoard, false);
+		});
+		B.$id('confirm-play').addEventListener('click', (e) => {
+			e.preventDefault();
+			e.preventDefault();
+			const play = Game.play(gameId);
+			_resultMove(play, false);
+		});
 	};
 
 	let module = {
@@ -128,62 +157,36 @@ loader.executeModule('gamePageModule',
 				player_turn: {html: B.$id('template-player-turn').innerHTML}
 			});
 
-			// Analyse data
-			Game.analyseGame(module.data.game);
-			Game.setPlayerScores(module.data.game, module.data.game_content);
-			module.data.game.size_bag = module.data.game_content.size_bag;
-			Game.setBoardContent(
-				module.data.board,
-				module.data.game_content.tokens
-			);
-			module.data.player_hand.forEach((token, index) => {
-				module.data.player_hand[index] = {'value': token, 'index': index};
-			});
+			const gameOpen = module.data.game.players.length < module.data.game.number_players;
+			if (gameOpen) {
+				B.$id('game-section').innerHTML = B.Template.compile(
+					'game_open',
+					module.data
+				);
+				return;
+			}
 
 			// Render page
 			let template;
-			let gameOngoing = false;
-			if (module.data.game.open) {
-				template = 'game_open';
-			}
-			else if (module.data.game.date_finished) {
+			let gameOngoing = !module.data.game.date_finished;
+
+			if (module.data.game.date_finished) {
 				template = 'game_finished';
 			}
 			else {
 				template = 'game_ongoing';
-				gameOngoing = true;
-			}
-			B.$id('game-section').innerHTML = B.Template.compile(
-				template,
-				module.data
-			);
-
-			if (!module.data.game.open) {
-				Game.setPlayerNames(module.data.game).then((names) => {
-					_displayPlayerNames(names);
-				});
 			}
 
-			if (gameOngoing) {
-				// Set events
-				document.querySelectorAll('#player-hand .token').forEach((token) => {
-					token.addEventListener('dragstart', (e) => {
-						e.dataTransfer.setData('token-id', token.id);
-					});
-				});
-				B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
-				B.$id('player-hand').addEventListener('drop', _dropTokenHand);
-				document.querySelectorAll('#board li').forEach((place) => {
-					place.addEventListener('dragover', _tokenOverBoard, false);
-					place.addEventListener('drop', _dropTokenBoard, false);
-				});
-				B.$id('confirm-play').addEventListener('click', (e) => {
-					e.preventDefault();
-					e.preventDefault();
-					const play = Game.play(gameId);
-					_resultMove(play, false);
-				});
-			}
+			Game.setPlayerNames(module.data.game).then((names) => {
+				_prepareGame(module);
+
+				B.$id('game-section').innerHTML = B.Template.compile(
+					template,
+					module.data
+				);
+
+				_setEvents();
+			});
 		}
 	};
 	app.addModule(module);
