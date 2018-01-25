@@ -31,7 +31,8 @@ loader.addModule('Game',
 		},
 		setPlayerScores: (game, content) => {
 			let maxScore = 0, winner = null;
-			for (let player of game.players) {
+			for (let user_id in game.players) {
+				let player = game.players[user_id];
 				if (!content.scores[player.id_user]) {
 					player.score = 0;
 				}
@@ -51,7 +52,8 @@ loader.addModule('Game',
 		setPlayerNames: (game) => {
 			let ids = new Set();
 			const _addPlayersGame = (game) => {
-				for (let player of game.players) {
+				for (let user_id in game.players) {
+					let player = game.players[user_id];
 					ids.add(player.id_user);
 				}
 			};
