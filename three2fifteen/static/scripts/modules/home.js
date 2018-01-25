@@ -17,9 +17,6 @@ loader.executeModule('homeModule',
 			Game.setPlayerNames(module.data.games).then((players) => {
 				module.data.games.forEach((game) => {
 					Game.analyseGame(game);
-					game.game_players.forEach((player) => {
-						player.name = players[player.id_user];
-					});
 					const gameHTML = B.Template.compile('game', {game: game});
 					B.$id('list-games').innerHTML += gameHTML;
 				});
