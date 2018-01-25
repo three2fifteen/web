@@ -20,9 +20,9 @@
 				[[if game.ongoing then game_link with game]]
 				[[if game.open then game_invite_link with game]]
 			</h4>
-			<p>number of players: [[game.current_players_count]] / [[game.number_players]]</p>
+			<p>number of players: [[game.count_players]] / [[game.number_players]]</p>
 			<ul>
-				[[each game.game_players as player on game_player]]
+				[[each game.players as player on game_player]]
 			</ul>
 		</li>
 	</script>
