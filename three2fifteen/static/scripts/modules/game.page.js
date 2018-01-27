@@ -116,6 +116,31 @@ loader.executeModule('gamePageModule',
 		});
 	};
 
+	const _render = () => {
+		let template;
+		let gameOngoing = !module.data.game.date_finished;
+
+		if (module.data.game.date_finished) {
+			template = 'game_finished';
+		}
+		else {
+			template = 'game_ongoing';
+		}
+
+		Game.setPlayerNames(module.data.game).then((names) => {
+			_prepareGame(module);
+
+			B.$id('game-section').innerHTML = B.Template.compile(
+				template,
+				module.data
+			);
+
+			if (!module.data.game.date_finished) {
+				_setEvents();
+			}
+		});
+	};
+
 	const _setEvents = () => {
 		// Set events
 		document.querySelectorAll('#player-hand .token').forEach((token) => {
@@ -168,28 +193,7 @@ loader.executeModule('gamePageModule',
 			}
 
 			// Render page
-			let template;
-			let gameOngoing = !module.data.game.date_finished;
-
-			if (module.data.game.date_finished) {
-				template = 'game_finished';
-			}
-			else {
-				template = 'game_ongoing';
-			}
-
-			Game.setPlayerNames(module.data.game).then((names) => {
-				_prepareGame(module);
-
-				B.$id('game-section').innerHTML = B.Template.compile(
-					template,
-					module.data
-				);
-
-				if (!module.data.game.date_finished) {
-					_setEvents();
-				}
-			});
+			_render();
 		}
 	};
 	app.addModule(module);
