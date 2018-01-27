@@ -28,8 +28,9 @@ function (auth, request, utils, config) {
 			}
 
 			const url = urls.shift();
+
 			if (endpoints && !endpoints.has(url.name)) {
-				resolve(module, action);
+				resolve();
 				return;
 			}
 
@@ -44,7 +45,7 @@ function (auth, request, utils, config) {
 
 					setPageData(module, url.name, response);
 					if (urls.length) {
-						resolve(module, urls, action);
+						resolve();
 					}
 					else {
 						action();
@@ -52,7 +53,9 @@ function (auth, request, utils, config) {
 				}
 			);
 		})
-		.then(getModuleData)
+		.then(() => {
+			getModuleData(module, urls, action, endpoints);
+		})
 		.catch(handleError);
 	}
 
