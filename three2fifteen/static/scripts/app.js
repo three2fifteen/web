@@ -21,9 +21,7 @@ function (auth, request, utils, config) {
 		}
 	}
 
-	function getModuleData(module, action) {
-		let urls = module.dataUrls;
-
+	function getModuleData(module, urls, action) {
 		new Promise(function(resolve, reject) {
 			if (!auth.isLoggedIn()) {
 				reject(401);
@@ -41,7 +39,7 @@ function (auth, request, utils, config) {
 
 					setPageData(module, url.name, response);
 					if (urls.length) {
-						resolve(module, action);
+						resolve(module, urls, action);
 					}
 					else {
 						action();
@@ -62,7 +60,7 @@ function (auth, request, utils, config) {
 		run: () => {
 			modules.forEach((module) => {
 				if (module.dataUrls) {
-					getModuleData(module, module.action);
+					getModuleData(module, module.dataUrls.slice(), module.action);
 				}
 				else {
 					module.action();
