@@ -21,13 +21,18 @@ function (auth, request, utils, config) {
 		}
 	}
 
-	function getModuleData(module, urls, action) {
+	function getModuleData(module, urls, action, endpoints = null) {
 		new Promise(function(resolve, reject) {
 			if (!auth.isLoggedIn()) {
 				reject(401);
 			}
 
 			const url = urls.shift();
+			if (endpoints && !endpoints.has(url.name)) {
+				resolve(module, action);
+				return;
+			}
+
 			request.get(
 				config.api_host + url.url,
 				auth.getHeader(),
