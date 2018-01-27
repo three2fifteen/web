@@ -46,7 +46,8 @@ function (auth, request, utils, config) {
 					else {
 						action();
 					}
-			});
+				}
+			);
 		})
 		.then(getModuleData)
 		.catch(handleError);
