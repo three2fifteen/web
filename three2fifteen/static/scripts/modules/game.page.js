@@ -53,6 +53,15 @@ loader.executeModule('gamePageModule',
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
 			_postMove(true, score, dryRun);
+			if (!dryRun) {
+				// fetch data back
+				app.getModuleData(
+					module,
+					module.dataUrls.slice(),
+					_render,
+					new Set(['game_content', 'game', 'player_hand'])
+				);
+			}
 		}).catch((message) => {
 			_postMove(false, message, false);
 		});
