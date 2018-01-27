@@ -62,6 +62,7 @@ function (auth, request, utils, config) {
 		addModule: (module) => {
 			modules.push(module);
 		},
+		getModuleData: getModuleData,
 		run: () => {
 			modules.forEach((module) => {
 				if (module.dataUrls) {
