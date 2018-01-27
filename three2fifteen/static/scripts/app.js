@@ -21,7 +21,7 @@ function (auth, request, utils, config) {
 		}
 	}
 
-	function getModuleData(module) {
+	function getModuleData(module, action) {
 		let urls = module.dataUrls;
 
 		new Promise(function(resolve, reject) {
@@ -41,10 +41,10 @@ function (auth, request, utils, config) {
 
 					setPageData(module, url.name, response);
 					if (urls.length) {
-						resolve(module);
+						resolve(module, action);
 					}
 					else {
-						module.action();
+						action();
 					}
 			});
 		})
@@ -61,7 +61,7 @@ function (auth, request, utils, config) {
 		run: () => {
 			modules.forEach((module) => {
 				if (module.dataUrls) {
-					getModuleData(module);
+					getModuleData(module, module.action);
 				}
 				else {
 					module.action();
