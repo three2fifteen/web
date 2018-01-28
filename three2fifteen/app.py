@@ -4,6 +4,7 @@ from tornado.web import Application, FallbackHandler
 from tornado.ioloop import IOLoop
 
 import three2fifteen.factory
+from three2fifteen import socket
 
 
 def main():
@@ -11,6 +12,7 @@ def main():
     container = WSGIContainer(app)
     server = Application(
         [
+            (r'/websocket/', socket.WebSocket),
             (r'.*', FallbackHandler, dict(fallback=container))
         ],
         autoreload=True
