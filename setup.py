@@ -15,7 +15,8 @@ setup(name='three2fifteen-web',
       long_description=open('README.rst').read(),
       install_requires=[
           'psycopg2',
-          'flask'
+          'flask',
+          'tornado'
       ],
       entry_points={
           'console_scripts': [
