@@ -1,13 +1,50 @@
+import json
+import logging
 from tornado.websocket import WebSocketHandler
 
 
+def _join_game(data):
+    pass
+
+
 class WebSocket(WebSocketHandler):
+    _actions_mapping = {
+        "join": _join_game
+    }
+
     def open(self):
-        print("Socket opened.")
+        self._logger = logging.getLogger(__name__)
+        self._logger.info("Socket opened")
 
     def on_message(self, message):
-        self.write_message("Received: " + message)
-        print("Received message: " + message)
+        """
+        message is a string containing a json dump. The json is expected to
+        contain a "type" key telling which type of message is received, and
+        potentially other keys, depending on the type
+        """
+        try:
+            data = json.loads(message)
+            message_type = data['type']
+        except json.JSONDecodeError:
+            self._logger.error("Invalid message received: {}".format(message))
+            return
+        except KeyError:
+            self._logger.error(
+                "Invalid message format received, type missing: {}".format(
+                    message
+                )
+            )
+            return
+
+        try:
+            action = self._actions_mapping[message_type]
+        except KeyError:
+            self._logger.error(
+                "Invalid message type: {}".format(message_type)
+            )
+            return
+
+        action(data)
 
     def on_close(self):
-        print("Socket closed.")
+        self._logger.info("Socket closed")
