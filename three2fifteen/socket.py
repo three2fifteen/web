@@ -3,11 +3,24 @@ import logging
 from tornado.websocket import WebSocketHandler
 
 
-def _join_game(data):
-    pass
+def _join_game(socket, data):
+    try:
+        game_id = data['game_id']
+    except KeyError:
+        return
+
+    try:
+        room = WebSocket._game_rooms[data['game_id']]
+    except KeyError:
+        room = []
+
+    room.append(socket)
+    WebSocket._game_rooms[data['game_id']] = room
 
 
 class WebSocket(WebSocketHandler):
+    _game_rooms = {}
+
     _actions_mapping = {
         "join": _join_game
     }
@@ -44,7 +57,7 @@ class WebSocket(WebSocketHandler):
             )
             return
 
-        action(data)
+        action(self, data)
 
     def on_close(self):
         self._logger.info("Socket closed")
