@@ -6,6 +6,22 @@
 
 .individual-game{
   padding: 24px 16px;
-  background-color: $light-gray;
   margin: 16px 0;
+  h3{
+    margin-top: 0px;
+  }
+  ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li{
+      display: inline;
+      padding: 0 4px;
+      border-right: 1px solid $gray;
+      text-transform: capitalize;
+      &:last-child{
+        border-right: none;
+      }
+    }
+  }
 }
