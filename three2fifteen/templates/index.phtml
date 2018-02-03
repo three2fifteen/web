@@ -6,7 +6,7 @@
 			<div class="col-sm-6">
 				<h3>Games</h3>
 				<a class="btn btn-primary btn-full-width" href="/game/create"> Start new game </a>
-				<ul id="list-games"></ul>
+				<div id="list-games"></div>
 			</div>
 		</div>
 	</div>
@@ -14,25 +14,25 @@
 	<!-- Templates used by the javascript application to populate the page with data-->
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
-		<li class="individual-game">
-			<h4>
-				game
+		<div class="individual-game card">
+			<h3>
+				Game
 				[[if game.ongoing then game_link with game]]
 				[[if game.open then game_invite_link with game]]
-			</h4>
-			<p>number of players: [[game.count_players]] / [[game.number_players]]</p>
+			</h3>
+			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
 			<ul>
 				[[each game.players as player on game_player]]
 			</ul>
-		</li>
+		</div>
 	</script>
 
 	<!-- Template to represent a user of a game -->
 	<script type="template" id="game-player">
 		<li>
 			[[player.name]]
-			[[if player.is_game_creator then game_creator]]
-			[[if player.is_turn then player_turn]]
+			 [[if player.is_game_creator then game_creator]]
+			<!-- [if player.is_turn then player_turn]] -->
 		</li>
 	</script>
 
