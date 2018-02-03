@@ -1,0 +1,16 @@
+#game-finished-section{
+  text-align: center;
+  .image{
+    width: 300px;
+    height: 300px;
+    margin: 24px auto;
+    &.winner{
+      background-image: url('../images/cup.png');
+      background-size: contain;
+    }
+  }
+  .btn{
+    margin-bottom: 32px;
+
+  }
+}
