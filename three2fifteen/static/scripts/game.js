@@ -25,28 +25,44 @@ loader.addModule('Game',
 
 	return {
 		analyseGame: (game) => {
-			game.current_players_count = game.game_players.length;
 			game.ongoing = game.date_started && !game.date_finished;
-			game.open = !game.date_finished && game.current_players_count < game.number_players;
 		},
 		setPlayerScores: (game, content) => {
-			for (let player of game.game_players) {
+			let maxScore = 0, winner = null;
+			for (let user_id in game.players) {
+				let player = game.players[user_id];
 				if (!content.scores[player.id_user]) {
 					player.score = 0;
 				}
 				else {
 					player.score = content.scores[player.id_user].score;
+					if (player.score > maxScore) {
+						maxScore = player.score;
+						winner = player.id_user;
+					}
 				}
+			}
+
+			if (game.date_finished) {
+				game.winner = game.players[winner];
+				game.current_is_winner = game.players[winner].is_current;
 			}
 		},
 		setPlayerNames: (game) => {
 			let ids = new Set();
 			const _addPlayersGame = (game) => {
-				for (let player of game.game_players) {
+				for (let user_id in game.players) {
+					let player = game.players[user_id];
 					ids.add(player.id_user);
 				}
 			};
-			if (game.game_players) {
+
+			const _setNames = (game, names) => {
+				for (let user_id in game.players) {
+					game.players[user_id].name = names[user_id];
+				}
+			};
+			if (game.players) {
 				_addPlayersGame(game);
 			}
 			else {
@@ -62,7 +78,16 @@ loader.addModule('Game',
 					),
 					auth.getHeader(),
 					(statusCode, body) => {
-						resolve(JSON.parse(body));
+						body = JSON.parse(body);
+						if (game.players) {
+							_setNames(game, body);
+						}
+						else {
+							for (let g of game) {
+								_setNames(g, body);
+							}
+						}
+						resolve();
 					}
 				);
 			});
