@@ -186,7 +186,9 @@ loader.executeModule('gamePageModule',
 					module.data
 				);
 
-				_setEvents();
+				if (!module.data.game.date_finished) {
+					_setEvents();
+				}
 			});
 		}
 	};
