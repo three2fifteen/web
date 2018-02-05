@@ -12,6 +12,7 @@ loader.executeModule('homeModule',
 				game_link: {html: B.$id('game-link').innerHTML},
 				game_invite_link: {html: B.$id('game-invite-link').innerHTML},
 				game_creator: {html: B.$id('template-game-creator').innerHTML},
+				game_finished: {html: B.$id('game-finished').innerHTML},
 				player_turn: {html: B.$id('template-player-turn').innerHTML}
 			});
 			Game.setPlayerNames(module.data.games).then((players) => {

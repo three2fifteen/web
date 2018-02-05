@@ -19,6 +19,7 @@
 				Game
 				[[if game.ongoing then game_link with game]]
 				[[if game.open then game_invite_link with game]]
+				[[if game.date_finished then game_finished]]
 			</h3>
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
 			<ul>
@@ -39,6 +40,11 @@
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-link">
 		<a href="/game/[[id_game]]">Go to game</a>
+	</script>
+
+	<!-- Template for the link to a game -->
+	<script type="template" id="game-finished">
+		The game is finished.
 	</script>
 
 	<!-- Template for the link to invite a player to a game -->
