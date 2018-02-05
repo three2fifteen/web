@@ -29,11 +29,11 @@ loader.addModule('Game',
 			game.open = !game.date_finished && game.count_players < game.number_players;
 		},
 		findWinner: (game) => {
-			let maxScore = 0, winner = null;
+			let maxPoints = 0, winner = null;
 			for (let user_id in game.players) {
 				let player = game.players[user_id];
-				if (player.score > maxScore) {
-					maxScore = player.score;
+				if (player.points > maxPoints) {
+					maxPoints = player.points;
 					winner = player.id_user;
 				}
 			}
