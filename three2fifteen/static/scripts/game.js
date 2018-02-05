@@ -28,23 +28,17 @@ loader.addModule('Game',
 			game.ongoing = game.date_started && !game.date_finished;
 			game.open = !game.date_finished && game.count_players < game.number_players;
 		},
-		setPlayerScores: (game, content) => {
+		findWinner: (game) => {
 			let maxScore = 0, winner = null;
 			for (let user_id in game.players) {
 				let player = game.players[user_id];
-				if (!content.scores[player.id_user]) {
-					player.score = 0;
-				}
-				else {
-					player.score = content.scores[player.id_user].score;
-					if (player.score > maxScore) {
-						maxScore = player.score;
-						winner = player.id_user;
-					}
+				if (player.score > maxScore) {
+					maxScore = player.score;
+					winner = player.id_user;
 				}
 			}
 
-			if (game.date_finished) {
+			if (winner != null) {
 				game.winner = game.players[winner];
 				game.current_is_winner = game.players[winner].is_current;
 			}

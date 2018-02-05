@@ -105,7 +105,7 @@ loader.executeModule('gamePageModule',
 	const _prepareGame = (module) => {
 		// Analyse data
 		Game.analyseGame(module.data.game);
-		Game.setPlayerScores(module.data.game, module.data.game_content);
+		Game.findWinner(module.data.game);
 		module.data.game.size_bag = module.data.game_content.size_bag;
 		Game.setBoardContent(
 			module.data.board,
