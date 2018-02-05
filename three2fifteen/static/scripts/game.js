@@ -26,6 +26,7 @@ loader.addModule('Game',
 	return {
 		analyseGame: (game) => {
 			game.ongoing = game.date_started && !game.date_finished;
+			game.open = !game.date_finished && game.count_players < game.number_players;
 		},
 		setPlayerScores: (game, content) => {
 			let maxScore = 0, winner = null;
