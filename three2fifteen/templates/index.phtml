@@ -16,29 +16,23 @@
 	<script type="template" id="game-instance">
 		<div class="individual-game card">
 			<h3>
-				Game
 				[[if game.ongoing then game_link with game]]
 				[[if game.open then game_invite_link with game]]
+				[[if game.date_finished then game_finished]]
 			</h3>
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
-			<ul>
-				[[each game.players as player on game_player]]
-			</ul>
+			[[each game.players as player on player_score]]
 		</div>
-	</script>
-
-	<!-- Template to represent a user of a game -->
-	<script type="template" id="game-player">
-		<li>
-			[[player.name]]
-			 [[if player.is_game_creator then game_creator]]
-			<!-- [if player.is_turn then player_turn]] -->
-		</li>
 	</script>
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-link">
 		<a href="/game/[[id_game]]">Go to game</a>
+	</script>
+
+	<!-- Template for the link to a game -->
+	<script type="template" id="game-finished">
+		The game is finished.
 	</script>
 
 	<!-- Template for the link to invite a player to a game -->
