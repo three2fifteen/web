@@ -21,19 +21,8 @@
 				[[if game.date_finished then game_finished]]
 			</h3>
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
-			<ul>
-				[[each game.players as player on game_player]]
-			</ul>
+			[[each game.players as player on player_score]]
 		</div>
-	</script>
-
-	<!-- Template to represent a user of a game -->
-	<script type="template" id="game-player">
-		<li>
-			[[player.name]]
-			 [[if player.is_game_creator then game_creator]]
-			[[if player.is_turn then player_turn]]
-		</li>
 	</script>
 
 	<!-- Template for the link to a game -->
