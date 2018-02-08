@@ -16,10 +16,15 @@ def _join_game(socket, data):
     except KeyError:
         room = []
 
+    socket.game_id = data['game_id']
     room.append(socket)
     logger.info("Socket joined %s", socket.game_id)
     logger.info("Number clients in room: %s", len(room))
     WebSocket._game_rooms[data['game_id']] = room
+
+
+def _leave_game(socket):
+    WebSocket._game_rooms[socket.game_id].remove(socket)
 
 
 class WebSocket(WebSocketHandler):
@@ -65,3 +70,4 @@ class WebSocket(WebSocketHandler):
 
     def on_close(self):
         self._logger.info("Socket closed")
+        _leave_game(self)
