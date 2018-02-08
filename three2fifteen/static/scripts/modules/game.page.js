@@ -1,6 +1,6 @@
 loader.executeModule('gamePageModule',
-'config', 'app', 'B', 'utils', 'Game',
-(config, app, B, utils, Game) => {
+'config', 'app', 'B', 'utils', 'Game', 'Socket',
+(config, app, B, utils, Game, Socket) => {
 	const gameId = B.$id('current_game_id').dataset.value;
 
 	const getLiNode = (node) => {
@@ -201,6 +201,7 @@ loader.executeModule('gamePageModule',
 				return;
 			}
 
+			Socket.join({}, gameId);
 			// Render page
 			_render();
 		}
