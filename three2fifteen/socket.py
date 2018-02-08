@@ -4,6 +4,8 @@ from tornado.websocket import WebSocketHandler
 
 
 def _join_game(socket, data):
+    logger = logging.getLogger(__name__)
+    logger.info("Try join game, %s", data)
     try:
         game_id = data['game_id']
     except KeyError:
@@ -15,6 +17,8 @@ def _join_game(socket, data):
         room = []
 
     room.append(socket)
+    logger.info("Socket joined %s", socket.game_id)
+    logger.info("Number clients in room: %s", len(room))
     WebSocket._game_rooms[data['game_id']] = room
 
 
