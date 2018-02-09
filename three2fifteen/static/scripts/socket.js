@@ -7,7 +7,11 @@ loader.addModule('Socket', 'config', (config) => {
 			"ws://" + location.hostname + ":" + location.port + "/websocket/"
 		);
 		socket.onopen = function() {
-			socket.send(JSON.stringify({'type': 'join', 'game_id': gameId}));
+			module.message({'type': 'join', 'game_id': gameId});
+		};
+
+		module.message = function(data) {
+			socket.send(JSON.stringify(data));
 		}
 
 		socket.onmessage = function(message) {
