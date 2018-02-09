@@ -1,6 +1,6 @@
 loader.executeModule('gamePageModule',
-'config', 'app', 'B', 'utils', 'Game',
-(config, app, B, utils, Game) => {
+'config', 'app', 'B', 'utils', 'Game', 'Socket',
+(config, app, B, utils, Game, Socket) => {
 	const gameId = B.$id('current_game_id').dataset.value;
 
 	const getLiNode = (node) => {
@@ -50,17 +50,22 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
+	const _refresh = () => {
+		app.getModuleData(
+			module,
+			module.dataUrls.slice(),
+			_render,
+			new Set(['game_content', 'game', 'player_hand'])
+		);
+	};
+
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
 			_postMove(true, score, dryRun);
 			if (!dryRun) {
 				// fetch data back
-				app.getModuleData(
-					module,
-					module.dataUrls.slice(),
-					_render,
-					new Set(['game_content', 'game', 'player_hand'])
-				);
+				_refresh();
+				Socket.message({'type': 'play'});
 			}
 		}).catch((message) => {
 			_postMove(false, message, false);
@@ -201,6 +206,10 @@ loader.executeModule('gamePageModule',
 				return;
 			}
 
+			Socket.join(
+				{'player-played': _refresh},
+				gameId
+			);
 			// Render page
 			_render();
 		}
