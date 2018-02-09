@@ -24,7 +24,7 @@ loader.addModule('Socket', 'config', (config) => {
 			}
 
 			onMessageHooks[data.type](data);
-		}
+		};
 	};
 
 	return module;
