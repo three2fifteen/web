@@ -65,6 +65,7 @@ loader.executeModule('gamePageModule',
 			if (!dryRun) {
 				// fetch data back
 				_refresh();
+				Socket.message({'type': 'play'});
 			}
 		}).catch((message) => {
 			_postMove(false, message, false);
@@ -205,7 +206,10 @@ loader.executeModule('gamePageModule',
 				return;
 			}
 
-			Socket.join({}, gameId);
+			Socket.join(
+				{'player-played': _refresh},
+				gameId
+			);
 			// Render page
 			_render();
 		}

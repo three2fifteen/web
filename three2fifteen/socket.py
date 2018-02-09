@@ -23,6 +23,17 @@ def _join_game(socket, data):
     WebSocket._game_rooms[data['game_id']] = room
 
 
+def _broadcast_play(socket, data):
+    try:
+        room = WebSocket._game_rooms[socket.game_id]
+    except KeyError:
+        return
+
+    for s in room:
+        if s != socket:
+            s.write_message(json.dumps({'type': 'player-played'}))
+
+
 def _leave_game(socket):
     WebSocket._game_rooms[socket.game_id].remove(socket)
 
@@ -31,7 +42,8 @@ class WebSocket(WebSocketHandler):
     _game_rooms = {}
 
     _actions_mapping = {
-        "join": _join_game
+        "join": _join_game,
+        "play": _broadcast_play
     }
 
     def open(self):
