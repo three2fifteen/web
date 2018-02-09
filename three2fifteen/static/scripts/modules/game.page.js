@@ -50,17 +50,21 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
+	const _refresh = () => {
+		app.getModuleData(
+			module,
+			module.dataUrls.slice(),
+			_render,
+			new Set(['game_content', 'game', 'player_hand'])
+		);
+	};
+
 	const _resultMove = (move, dryRun) => {
 		move.then((score) => {
 			_postMove(true, score, dryRun);
 			if (!dryRun) {
 				// fetch data back
-				app.getModuleData(
-					module,
-					module.dataUrls.slice(),
-					_render,
-					new Set(['game_content', 'game', 'player_hand'])
-				);
+				_refresh();
 			}
 		}).catch((message) => {
 			_postMove(false, message, false);
