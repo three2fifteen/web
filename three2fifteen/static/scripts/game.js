@@ -17,6 +17,9 @@ loader.addModule('Game',
 						reject(body.message);
 					}
 
+					if (!dryRun) {
+						_currentPlay = {};
+					}
 					resolve(body.score);
 				}
 			);
