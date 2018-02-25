@@ -19,7 +19,7 @@
 			[[if game.date_finished then game_finished]]
 			[[if game.open then game_invite_link with game]]
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
-			[[each game.players as player on player_score]]
+			<div class="score-wrapper">[[each game.players as player on player_score]]</div>
 		</div>
 	</script>
 
