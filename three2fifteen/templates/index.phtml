@@ -15,11 +15,9 @@
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
 		<div class="individual-game card">
-			<h3>
-				[[if game.ongoing then game_link with game]]
-				[[if game.open then game_invite_link with game]]
-				[[if game.date_finished then game_finished]]
-			</h3>
+			[[if game.ongoing then game_link with game]]
+			[[if game.date_finished then game_finished]]
+			[[if game.open then game_invite_link with game]]
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
 			[[each game.players as player on player_score]]
 		</div>
@@ -27,17 +25,23 @@
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-link">
-		<a href="/game/[[id_game]]">Go to game</a>
+		<h3><a href="/game/[[id_game]]">Go to game</a></h3>
 	</script>
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-finished">
-		The game is finished.
+		<h3>The game is finished.</h3>
 	</script>
 
 	<!-- Template for the link to invite a player to a game -->
 	<script type="template" id="game-invite-link">
-		<span>Invite link: <a href="/game/join/[[public_id]]">Copy link</a>
+				<h3>Invite to play</h3>
+				<div class="copy-link-group">
+				  <div class="copy-link-text">/game/join/[[public_id]]</div>
+				  <div class="copy-link-group-append">
+				    <button class="btn btn-outline-secondary" type="button">Copy Link</button>
+				  </div>
+				</div>
 	</script>
 	{% include "game-player-info.phtml" %}
 {% endblock %}
