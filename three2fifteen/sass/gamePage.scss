@@ -104,7 +104,7 @@
 .cell[data-x='13'][data-y='1'],
 .cell[data-x='1'][data-y='13'],
 .cell[data-x='13'][data-y='13']{
-  // background-color: $light-purple;
+  background-color: $light-purple;
 }
 
 .cell[data-x='7'][data-y='0']::after,
@@ -116,7 +116,7 @@
 .cell[data-x='1'][data-y='13']::after,
 .cell[data-x='13'][data-y='13']::after {
   font-family: 'Material Icons';
-  // content: '\e042';
+  content: '\e042';
 }
 
 
