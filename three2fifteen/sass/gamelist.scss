@@ -24,4 +24,15 @@
       }
     }
   }
+  .copy-link-group
+  {
+    @extend .input-group;
+    .copy-link-text{
+      @extend .form-control;
+    }
+    .copy-link-group-append{
+      @extend .input-group-append;
+    }
+  }
+
 }
