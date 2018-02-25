@@ -10,14 +10,17 @@
 
 	<script type="template" id="game-ongoing">
 		<div id="game-play-section" class="col-sm-8">
-
-			<ul id="board">
-				[[each board as cell on board_cell]]
-			</ul>
+			<div id="board-wrapper">
+				<ul id="board">
+					[[each board as cell on board_cell]]
+				</ul>
+			</div>
 			<div id="player-hand">
 				[[each player_hand as token on player_token]]
 			</div>
-			<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
+			<div id="confirm-button-wrapper">
+				<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
+			</div>
 		</div>
 		<div id="player-scores" class="col-sm-4">
 			<h3>Scores:</h3>
