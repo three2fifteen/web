@@ -26,11 +26,15 @@
 
 
 #game-play-section{
+  #board-wrapper{
+    overflow: scroll;
+    margin: 24px auto 0px;
+  }
   #board {
     list-style: none;
     width: 540px;
     padding: 0px;
-    margin: 24px auto 0px;
+    margin: 0 auto;
     &::after{
       content: '';
       clear: both;
@@ -42,7 +46,7 @@
     clear: both;
     text-align: center;
     height: 64px;
-    padding: 16px 0;
+    padding: 1rem 0 0;
     margin: 0 auto;
     width: 100%;
     // background: $light-yellow;
@@ -50,27 +54,35 @@
     .token {
       display: inline-block;
       position: relative;
-      margin: 2px;
+      margin: 0 2px;
       width: 32px;
       height: 32px;
     }
   }
 
   .game-info{
-    margin-top:16px;
+    margin-top:1rem;
     height: 40px;
     align-items: center;
     border-bottom: 1px solid $light-gray;
     display: flex;
     justify-content: space-around;
   }
+  #confirm-button-wrapper{
+    padding: 1rem;
+    margin: 0 -15px;
+    background: #fafafa;
+    border-top: 1px solid #eeeeee;
+    #confirm-play{
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
 }
 
-#confirm-play{
-  width: 540px;
-  display: block;
-  margin: 0 auto 32px;
-}
+
 
 .cell {
   background-color: $light-gray;
