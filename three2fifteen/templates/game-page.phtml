@@ -3,6 +3,7 @@
 	{% include "header.phtml" %}
 
 	<div class="container">
+		<div id="alert-container" class="hidden alert" role="alert"></div>
 		<div id="game-section" class="row justify-content-center">
 
 		</div>
@@ -20,7 +21,6 @@
 			</div>
 			<div class="game-info">
 				Tokens remaining: [[game.size_bag]]
-				<div id="alert-container" class="hidden alert" role="alert"></div>
 			</div>
 			<div id="player-hand">
 				[[each player_hand as token on player_token]]
@@ -32,7 +32,6 @@
 		<div id="player-scores" class="col-lg-4 d-none d-lg-block">
 			<h3>Scores:</h3>
 			[[each game.players as player on player_score]]
-
 		</div>
 	</script>
 
