@@ -28,7 +28,7 @@
 #game-play-section{
   #board-wrapper{
     overflow: scroll;
-    margin: 24px auto 0px;
+    margin: 1rem auto 0px;
   }
   #board {
     list-style: none;
@@ -185,6 +185,37 @@
   content: 'x2'
 }
 
+
+#player-scores-mobile{
+  justify-content: space-between;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #eeeeee;
+  .score{
+    width: 45%;
+    height: 2rem;
+    font: $subhead;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    .player-info{
+      display: flex;
+      font-size: $header;
+      .player-turn{
+        color: $yellow;
+      }
+      .player-avatar{
+        display: none;
+        display: inline-block;
+      }
+    }
+    .player-score{
+      font-weight: 600;
+    }
+
+
+  }
+}
 
 #player-scores{
   border-left: 1px solid #eeeeee;
