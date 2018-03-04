@@ -15,6 +15,10 @@
 					[[each board as cell on board_cell]]
 				</ul>
 			</div>
+			<div class="game-info">
+				Tokens remaining: [[game.size_bag]]
+				<div id="alert-container" class="hidden alert" role="alert"></div>
+			</div>
 			<div id="player-hand">
 				[[each player_hand as token on player_token]]
 			</div>
@@ -25,10 +29,6 @@
 		<div id="player-scores" class="col-sm-4">
 			<h3>Scores:</h3>
 			[[each game.players as player on player_score]]
-			<div class="game-info">
-				<h4>Tokens remaining: [[game.size_bag]]</h4>
-				<div id="alert-container" class="hidden alert" role="alert"></div>
-			</div>
 		</div>
 	</script>
 
