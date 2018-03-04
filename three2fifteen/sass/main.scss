@@ -63,6 +63,11 @@ h5{
 	background-color:$primary-color!important;
 }
 
+.btn-primary.disabled, .btn-primary:disabled{
+	background-color: #cccccc;
+	border-color: #cccccc;
+}
+
 .btn-light{
 	background-color: transparent;
 	border-color: transparent;
