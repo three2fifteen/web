@@ -35,13 +35,13 @@
 
 	<!-- Template for the link to invite a player to a game -->
 	<script type="template" id="game-invite-link">
-				<h3>Invite to play</h3>
-				<div class="copy-link-group">
-				  <div class="copy-link-text">/game/join/[[public_id]]</div>
-				  <div class="copy-link-group-append">
-				    <button class="btn btn-outline-secondary" type="button">Copy Link</button>
-				  </div>
-				</div>
+		<h3>Invite to play</h3>
+		<div class="copy-link-group">
+		  <input type="text" id="link-[[public_id]]" readonly class="copy-link-text hidden" value="/game/join/[[public_id]]" />
+		  <a class="copy-link-group-append" href="/game/join/[[public_id]]">
+			<button rel="link-[[public_id]]" class="btn btn-outline-secondary copy-link-btn" type="button">Copy Link</button>
+		  </a>
+		</div>
 	</script>
 	{% include "game-player-info.phtml" %}
 {% endblock %}

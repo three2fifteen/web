@@ -22,6 +22,15 @@ loader.executeModule('homeModule',
 					B.$id('list-games').innerHTML += gameHTML;
 				});
 			});
+			B.$id("list-games").addEventListener('click', (e) => {
+				if (B.hasClass(e.target, 'copy-link-btn')) {
+					e.preventDefault();
+					let field = B.$id(e.target.getAttribute('rel'));
+					B.removeClass(field, "hidden");
+					field.select();
+					document.execCommand("Copy");
+				}
+			});
 		}
 	};
 	app.addModule(module);
