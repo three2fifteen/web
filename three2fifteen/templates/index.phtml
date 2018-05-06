@@ -37,10 +37,22 @@
 	<script type="template" id="game-invite-link">
 		<h3>Invite to play</h3>
 		<div class="copy-link-group">
-		  <input type="text" id="link-[[public_id]]" readonly class="copy-link-text hidden" value="/game/join/[[public_id]]" />
-		  <a class="copy-link-group-append" href="/game/join/[[public_id]]">
-			<button rel="link-[[public_id]]" class="btn btn-outline-secondary copy-link-btn" type="button">Copy Link</button>
-		  </a>
+			<input
+				type="text"
+				id="link-[[public_id]]"
+				readonly
+				class="copy-link-text hidden"
+				value="[[host]]/game/join/[[public_id]]"
+			/>
+			<a class="copy-link-group-append" href="[[host]]game/join/[[public_id]]">
+				<button
+					rel="link-[[public_id]]"
+					class="btn btn-outline-secondary copy-link-btn"
+					type="button"
+				>
+					Copy Link
+				</button>
+			</a>
 		</div>
 	</script>
 	{% include "game-player-info.phtml" %}
