@@ -9,6 +9,11 @@ loader.executeModule('signupModule',
 			form.addEventListener('submit', (e) => {
 				B.$id("form-message").innerHTML = "";
 				e.preventDefault();
+				if (form.password.value != form['password-confirm'].value) {
+					B.$id("form-message").innerHTML = "The passwords do not match";
+					return;
+				}
+
 				request.post(
 					config.api_host + config.api_signup,
 					JSON.stringify({
