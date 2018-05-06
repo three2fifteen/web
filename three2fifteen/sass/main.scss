@@ -1,8 +1,10 @@
+@import "bootstrap/bootstrap";
 @import "config";
 @import "gamelist";
 @import "gamePage";
 @import "createGame";
 @import "gameFinishPage";
+
 
 *,
 *::after,
@@ -59,6 +61,11 @@ h5{
 
 .bg-primary{
 	background-color:$primary-color!important;
+}
+
+.btn-primary.disabled, .btn-primary:disabled{
+	background-color: #cccccc;
+	border-color: #cccccc;
 }
 
 .btn-light{

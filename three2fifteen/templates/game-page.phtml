@@ -3,29 +3,35 @@
 	{% include "header.phtml" %}
 
 	<div class="container">
+		<div id="alert-container" class="hidden alert" role="alert"></div>
 		<div id="game-section" class="row justify-content-center">
 
 		</div>
 	</div>
 
 	<script type="template" id="game-ongoing">
-		<div id="game-play-section" class="col-sm-8">
-
-			<ul id="board">
-				[[each board as cell on board_cell]]
-			</ul>
+		<div id="player-scores-mobile" class="col-lg-4 d-lg-none d-flex flex-row">
+			[[each game.players as player on player_score]]
+		</div>
+		<div id="game-play-section" class="col-lg-8">
+			<div id="board-wrapper">
+				<ul id="board">
+					[[each board as cell on board_cell]]
+				</ul>
+			</div>
+			<div class="game-info">
+				Tokens remaining: [[game.size_bag]]
+			</div>
 			<div id="player-hand">
 				[[each player_hand as token on player_token]]
 			</div>
-			<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
+			<div id="confirm-button-wrapper">
+				<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
+			</div>
 		</div>
-		<div id="player-scores" class="col-sm-4">
+		<div id="player-scores" class="col-lg-4 d-none d-lg-block">
 			<h3>Scores:</h3>
 			[[each game.players as player on player_score]]
-			<div class="game-info">
-				<h4>Tokens remaining: [[game.size_bag]]</h4>
-				<div id="alert-container" class="hidden alert" role="alert"></div>
-			</div>
 		</div>
 	</script>
 

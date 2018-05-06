@@ -18,9 +18,22 @@ loader.executeModule('homeModule',
 			Game.setPlayerNames(module.data.games).then((players) => {
 				module.data.games.forEach((game) => {
 					Game.analyseGame(game);
-					const gameHTML = B.Template.compile('game', {game: game});
+					game.host = window.location.protocol + '//' + window.location.host;
+					const gameHTML = B.Template.compile(
+						'game',
+						{game: game}
+					);
 					B.$id('list-games').innerHTML += gameHTML;
 				});
+			});
+			B.$id("list-games").addEventListener('click', (e) => {
+				if (B.hasClass(e.target, 'copy-link-btn')) {
+					e.preventDefault();
+					let field = B.$id(e.target.getAttribute('rel'));
+					B.removeClass(field, "hidden");
+					field.select();
+					document.execCommand("Copy");
+				}
 			});
 		}
 	};

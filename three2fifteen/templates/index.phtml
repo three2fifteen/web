@@ -3,7 +3,7 @@
 	{% include "header.phtml" %}
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<div class="col-sm-6">
+			<div class="col-lg-6">
 				<h3>Games</h3>
 				<a class="btn btn-primary btn-full-width" href="/game/create"> Start new game </a>
 				<div id="list-games"></div>
@@ -15,29 +15,45 @@
 	<!-- Template to represent a game of the current player -->
 	<script type="template" id="game-instance">
 		<div class="individual-game card">
-			<h3>
-				[[if game.ongoing then game_link with game]]
-				[[if game.open then game_invite_link with game]]
-				[[if game.date_finished then game_finished]]
-			</h3>
+			[[if game.ongoing then game_link with game]]
+			[[if game.date_finished then game_finished]]
+			[[if game.open then game_invite_link with game]]
 			<h4>Players: [[game.count_players]] / [[game.number_players]]</h5>
-			[[each game.players as player on player_score]]
+			<div class="score-wrapper">[[each game.players as player on player_score]]</div>
 		</div>
 	</script>
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-link">
-		<a href="/game/[[id_game]]">Go to game</a>
+		<h3><a href="/game/[[id_game]]">Go to game</a></h3>
 	</script>
 
 	<!-- Template for the link to a game -->
 	<script type="template" id="game-finished">
-		The game is finished.
+		<h3>The game is finished.</h3>
 	</script>
 
 	<!-- Template for the link to invite a player to a game -->
 	<script type="template" id="game-invite-link">
-		<span>Invite link: <a href="/game/join/[[public_id]]">Copy link</a>
+		<h3>Invite to play</h3>
+		<div class="copy-link-group">
+			<input
+				type="text"
+				id="link-[[public_id]]"
+				readonly
+				class="copy-link-text hidden"
+				value="[[host]]/game/join/[[public_id]]"
+			/>
+			<a class="copy-link-group-append" href="[[host]]game/join/[[public_id]]">
+				<button
+					rel="link-[[public_id]]"
+					class="btn btn-outline-secondary copy-link-btn"
+					type="button"
+				>
+					Copy Link
+				</button>
+			</a>
+		</div>
 	</script>
 	{% include "game-player-info.phtml" %}
 {% endblock %}

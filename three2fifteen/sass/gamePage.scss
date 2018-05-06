@@ -16,21 +16,25 @@
 }
 
 #alert-container{
-  margin: 16px 0;
+  margin: .5rem 0;
 }
 #game-section{
   background: $white;
-  margin: 16px 0;
+  margin: .5rem 0;
   border: 1px solid #eeeeee;
 }
 
 
 #game-play-section{
+  #board-wrapper{
+    overflow: scroll;
+    margin: 1rem auto 0px;
+  }
   #board {
     list-style: none;
     width: 540px;
     padding: 0px;
-    margin: 24px auto 0px;
+    margin: 0 auto;
     &::after{
       content: '';
       clear: both;
@@ -41,36 +45,41 @@
   #player-hand {
     clear: both;
     text-align: center;
-    height: 64px;
-    padding: 16px 0;
-    margin: 0 auto;
+    height: 32px;
+    margin: .5rem auto .5rem;
     width: 100%;
     // background: $light-yellow;
     // border: 1px black solid;
     .token {
       display: inline-block;
       position: relative;
-      margin: 2px;
+      margin: 0 2px;
       width: 32px;
       height: 32px;
     }
   }
 
   .game-info{
-    margin-top:16px;
-    height: 40px;
+    height: 2rem;
     align-items: center;
-    border-bottom: 1px solid $light-gray;
     display: flex;
     justify-content: space-around;
   }
+  #confirm-button-wrapper{
+    padding: 1rem;
+    margin: 0 -15px;
+    background: #fafafa;
+    border-top: 1px solid #eeeeee;
+    #confirm-play{
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
 }
 
-#confirm-play{
-  width: 540px;
-  display: block;
-  margin: 0 auto 32px;
-}
+
 
 .cell {
   background-color: $light-gray;
@@ -104,7 +113,7 @@
 .cell[data-x='13'][data-y='1'],
 .cell[data-x='1'][data-y='13'],
 .cell[data-x='13'][data-y='13']{
-  // background-color: $light-purple;
+  background-color: $light-purple;
 }
 
 .cell[data-x='7'][data-y='0']::after,
@@ -116,7 +125,7 @@
 .cell[data-x='1'][data-y='13']::after,
 .cell[data-x='13'][data-y='13']::after {
   font-family: 'Material Icons';
-  // content: '\e042';
+  content: '\e042';
 }
 
 
@@ -176,6 +185,37 @@
   content: 'x2'
 }
 
+
+#player-scores-mobile{
+  justify-content: space-between;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #eeeeee;
+  .score{
+    width: 45%;
+    height: 2rem;
+    font: $subhead;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    .player-info{
+      display: flex;
+      font-size: $header;
+      .player-turn{
+        color: $yellow;
+      }
+      .player-avatar{
+        display: none;
+        display: inline-block;
+      }
+    }
+    .player-score{
+      font-weight: 600;
+    }
+
+
+  }
+}
 
 #player-scores{
   border-left: 1px solid #eeeeee;

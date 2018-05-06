@@ -24,4 +24,25 @@
       }
     }
   }
+  .score-wrapper{
+    display: flex;
+    .score{
+      width: 25%;
+      .player-turn{
+        display: none;
+      }
+    }
+  }
+  .copy-link-group
+  {
+    @extend .input-group;
+    margin-bottom: .8rem;
+    .copy-link-text{
+      @extend .form-control;
+    }
+    .copy-link-group-append{
+      @extend .input-group-append;
+    }
+  }
+
 }
