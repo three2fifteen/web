@@ -22,6 +22,11 @@ def signup():
     return render_template('signup.phtml')
 
 
+@bp.route('/rules')
+def rules():
+    return render_template('rules.phtml')
+
+
 @bp.route('/config.js')
 def config():
     controller = ConfigController(current_app.config)
