@@ -187,7 +187,6 @@ loader.executeModule('gamePageModule',
 		});
 		B.$id('confirm-play').addEventListener('click', (e) => {
 			e.preventDefault();
-			e.preventDefault();
 			const play = Game.play(gameId);
 			_resultMove(play, false);
 		});
