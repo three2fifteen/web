@@ -50,6 +50,10 @@ loader.executeModule('gamePageModule',
 		e.preventDefault();
 	}
 
+	const _tokenOverBin = (e) => {
+		e.preventDefault();
+	}
+
 	const _refresh = () => {
 		app.getModuleData(
 			module,
@@ -86,6 +90,10 @@ loader.executeModule('gamePageModule',
 		const move = callback(token, destination);
 		_resultMove(move, true);
 		B.removeClass(_hoveredCell, 'hovered');
+		if (!B.$id('token-bin').children.length) {
+			B.addClass(B.$id('skip-turn'), 'hidden');
+			B.removeClass(B.$id('confirm-play'), 'hidden');
+		}
 	};
 
 	const _dropTokenHand = (e) => {
@@ -113,6 +121,13 @@ loader.executeModule('gamePageModule',
 				parseInt(li.dataset.y),
 				parseInt(token.dataset.value)
 			);
+		});
+	};
+
+	const _dropTokenBin = (e) => {
+		_dropToken(e, B.$id('token-bin'), false, (token, li) => {
+			B.addClass(B.$id('confirm-play'), 'hidden');
+			B.removeClass(B.$id('skip-turn'), 'hidden');
 		});
 	};
 
@@ -164,6 +179,8 @@ loader.executeModule('gamePageModule',
 		});
 		B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
 		B.$id('player-hand').addEventListener('drop', _dropTokenHand);
+		B.$id('token-bin').addEventListener('dragover', _tokenOverBin);
+		B.$id('token-bin').addEventListener('drop', _dropTokenBin);
 		document.querySelectorAll('#board li').forEach((place) => {
 			place.addEventListener('dragover', _tokenOverBoard, false);
 			place.addEventListener('drop', _dropTokenBoard, false);
