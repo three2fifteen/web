@@ -60,6 +60,9 @@ loader.executeModule('gamePageModule',
 	};
 
 	const _resultMove = (move, dryRun) => {
+		if (!move) {
+			return;
+		}
 		move.then((score) => {
 			_postMove(true, score, dryRun);
 			if (!dryRun) {
@@ -72,40 +75,37 @@ loader.executeModule('gamePageModule',
 		});
 	};
 
-	const _dropToken = (e, callback) => {
+	const _dropToken = (e, destination, multiple_children, callback) => {
 		e.preventDefault();
-		const li = getLiNode(e.target);
 		const token = B.$id(e.dataTransfer.getData('token-id'));
 		// Prevent from dropping more than one token in the same space
-		if (li.children.length) {
+		if (!multiple_children && destination.children.length) {
 			return;
 		}
-		li.appendChild(token);
-		const move = callback(token, li);
+		destination.appendChild(token);
+		const move = callback(token, destination);
 		_resultMove(move, true);
 		B.removeClass(_hoveredCell, 'hovered');
-		_hoveredCell = e.target;
 	};
 
 	const _dropTokenHand = (e) => {
-		e.preventDefault();
-		const token = B.$id(e.dataTransfer.getData('token-id'));
-		B.$id('player-hand').appendChild(token);
-		const move = Game.removeToken(
-			gameId,
-			token.id
+		const li = B.$id('player-hand');
+		_dropToken(e, li, true, (token, li) => {
+			const move = Game.removeToken(
+				gameId,
+				token.id
+			);
+			if (!move) {
+				_postMove(true, '', false);
+			}
+			return move;
+		}
 		);
-		if (move) {
-			_resultMove(move, true);
-		}
-		else {
-			_postMove(true, '', false);
-		}
-		B.removeClass(_hoveredCell, 'hovered');
 	};
 
 	const _dropTokenBoard = (e) => {
-		_dropToken(e, (token, li) => {
+		const li = getLiNode(e.target);
+		_dropToken(e, li, false, (token, li) => {
 			return Game.placeToken(
 				gameId,
 				token.id,
