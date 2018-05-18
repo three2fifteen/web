@@ -10,11 +10,6 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
-	let _hoveredCell = null;
-	const _tokenOverHand = (e) => {
-		e.preventDefault();
-	}
-
 	const _postMove = (valid, message, enableConfirm) => {
 		let cpNode = B.$id('confirm-play'),
 			alertNode = B.$id('alert-container');
@@ -42,6 +37,11 @@ loader.executeModule('gamePageModule',
 			cpNode.setAttribute('disabled', 'disabled');
 		}
 	};
+
+	let _hoveredCell = null;
+	const _tokenOverHand = (e) => {
+		e.preventDefault();
+	}
 
 	const _tokenOverBoard = (e) => {
 		B.removeClass(_hoveredCell, 'hovered');
