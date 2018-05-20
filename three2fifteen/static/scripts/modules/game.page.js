@@ -190,6 +190,17 @@ loader.executeModule('gamePageModule',
 			const play = Game.play(gameId);
 			_resultMove(play, false);
 		});
+		B.$id('skip-turn').addEventListener('click', (e) => {
+			e.preventDefault();
+			let discarded_tokens = B.$id('token-bin').children;
+			if (!discarded_tokens || !B.hasClass(discarded_tokens[0], 'token')) {
+				return;
+			}
+			const skip = Game.skip(
+				gameId, parseInt(discarded_tokens[0].dataset.value)
+			);
+			_resultMove(skip, false);
+		});
 	};
 
 	let module = {

@@ -26,6 +26,25 @@ loader.addModule('Game',
 		});
 	};
 
+	const skip = (gameId, token_to_discard) => {
+		return new Promise((resolve, reject) => {
+			request.put(
+				utils.format(config.api_host + config.api_skip_turn, [gameId]),
+				JSON.stringify({'token_to_discard': token_to_discard}),
+				auth.getHeader(),
+				(statusCode, body) => {
+					body = JSON.parse(body);
+					if (statusCode != 200) {
+						reject(body.message);
+					}
+
+					_currentPlay = {};
+					resolve(body.score);
+				}
+			);
+		});
+	};
+
 	return {
 		analyseGame: (game) => {
 			game.ongoing = game.date_started && !game.date_finished;
@@ -106,6 +125,7 @@ loader.addModule('Game',
 		},
 		play: (gameId) => {
 			return _play(gameId, false);
-		}
+		},
+		skip: skip
 	};
 });
