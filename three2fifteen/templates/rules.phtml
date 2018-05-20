@@ -1,7 +1,7 @@
 {% extends "layout.phtml" %}
 {% block body %}
 	{% include "header.phtml" %}
-	<div class="container">
+	<div class="container rules">
 		<div class="row justify-content-md-center">
 			<div class="col-lg-6">
 				<h1>Rules</h1>
@@ -89,18 +89,18 @@
 					There are 4 different special spaces on the board:
 					<ul>
 						<li>
-							Doubles and triples: When a token is plaed over a
-							<b>double</b> or a <b>triple</b> space, the value of
+							Doubles and triples: When a token is plcaed over a
+							<b>double</b> <span class="cell cell-double"> </span> or a <b>triple</b> <span class="cell cell-triple"> </span> space, the value of
 							that token is doubled or tripled. If the played
 							token completes a row or column of three tokens, the
 							whole 30 points that the player would have got are
 							doubled or tripled (granting 60 or 90 points).
 						<li>
-							The center space must be used on the first turn, and
+							The center space <span class="cell cell-start"> </span> must be used on the first turn, and
 							acts as a <b>double</b>.
 						</li>
 						<li>
-							Repeat: when playing on a repeat space, the player
+							Repeat: when playing on a repeat space <span class="cell cell-repeat"> </span>, the player
 							will be able to play a second time (after redrawing
 							tokens to fill his/her hand). Repeat spaces are
 							cumulative, if after a <b>repeat</b> the player
