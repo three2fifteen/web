@@ -26,10 +26,11 @@ loader.addModule('Game',
 		});
 	};
 
-	const skip = (gameId, token_to_discard) => {
+	const skip = (gameId, token_to_discard, dryRun) => {
+		const endpoint = dryRun && config.api_skip_turn_check || config.api_skip_turn;
 		return new Promise((resolve, reject) => {
 			request.put(
-				utils.format(config.api_host + config.api_skip_turn, [gameId]),
+				utils.format(config.api_host + endpoint, [gameId]),
 				JSON.stringify({'token_to_discard': token_to_discard}),
 				auth.getHeader(),
 				(statusCode, body) => {
@@ -38,7 +39,9 @@ loader.addModule('Game',
 						reject(body.message);
 					}
 
-					_currentPlay = {};
+					if (!dryRun) {
+						_currentPlay = {};
+					}
 					resolve(body.score);
 				}
 			);

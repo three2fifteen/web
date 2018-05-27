@@ -126,8 +126,13 @@ loader.executeModule('gamePageModule',
 
 	const _dropTokenBin = (e) => {
 		_dropToken(e, B.$id('token-bin'), false, (token, li) => {
-			B.addClass(B.$id('confirm-play'), 'hidden');
-			B.removeClass(B.$id('skip-turn'), 'hidden');
+			Game.skip(gameId, parseInt(token.dataset.value), true).then((score) => {
+				_postMove(true, score, true);
+				B.addClass(B.$id('confirm-play'), 'hidden');
+				B.removeClass(B.$id('skip-turn'), 'hidden');
+			}).catch((message) => {
+				_postMove(false, message, true);
+			});
 		});
 	};
 

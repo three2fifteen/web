@@ -17,5 +17,6 @@ class ConfigController(object):
             'api_turn_check': self.config['API_TURN_CHECK'],
             'api_turn': self.config['API_TURN'],
             'api_skip_turn': self.config['API_SKIP_TURN'],
+            'api_skip_turn_check': self.config['API_SKIP_TURN_CHECK'],
             'api_get_player_names': self.config['API_GET_PLAYER_NAMES']
         }
