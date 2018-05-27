@@ -4,34 +4,19 @@ loader.addModule('Game',
 	let _currentPlay = {};
 	const BOARD_WIDTH = 15;
 
-	const _play = (gameId, dryRun) => {
-		const endpoint = dryRun && config.api_turn_check || config.api_turn;
+	const _play = (gameId, skip, dryRun, data=null) => {
+		// [0][0] is play not dry run
+		// [0][1] is play dry run
+		// [1][0] is skip play not dry run
+		// [1][1] is skip play dry run
+		const endpoint = [
+			[config.api_turn, config.api_turn_check],
+			[config.api_skip_turn, config.api_skip_turn_check],
+		][0|skip][0|dryRun];
 		return new Promise((resolve, reject) => {
 			request.put(
 				utils.format(config.api_host + endpoint, [gameId]),
-				JSON.stringify({'play': Object.values(_currentPlay)}),
-				auth.getHeader(),
-				(statusCode, body) => {
-					body = JSON.parse(body);
-					if (statusCode != 200) {
-						reject(body.message);
-					}
-
-					if (!dryRun) {
-						_currentPlay = {};
-					}
-					resolve(body.score);
-				}
-			);
-		});
-	};
-
-	const skip = (gameId, token_to_discard, dryRun) => {
-		const endpoint = dryRun && config.api_skip_turn_check || config.api_skip_turn;
-		return new Promise((resolve, reject) => {
-			request.put(
-				utils.format(config.api_host + endpoint, [gameId]),
-				JSON.stringify({'token_to_discard': token_to_discard}),
+				JSON.stringify(data || {'play': Object.values(_currentPlay)}),
 				auth.getHeader(),
 				(statusCode, body) => {
 					body = JSON.parse(body);
@@ -120,15 +105,22 @@ loader.addModule('Game',
 		},
 		placeToken: (gameId, tokenId, x, y, value) => {
 			_currentPlay[tokenId] = {'value': value, 'x': x, 'y': y};
-			return _play(gameId, true);
+			return _play(gameId, false, true);
 		},
 		removeToken: (gameId, tokenId) => {
 			delete _currentPlay[tokenId];
-			return Object.keys(_currentPlay).length && _play(gameId, true);
+			return Object.keys(_currentPlay).length && _play(gameId, false, true);
 		},
 		play: (gameId) => {
-			return _play(gameId, false);
+			return _play(gameId, false, false);
 		},
-		skip: skip
+		skip: (gameId, tokenToDiscard, dryRun) => {
+			return _play(
+				gameId,
+				true,
+				dryRun,
+				{'token_to_discard': tokenToDiscard}
+			);
+		}
 	};
 });
