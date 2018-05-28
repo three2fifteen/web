@@ -1,11 +1,18 @@
+#game-section{
+  background: $white;
+  // display: grid;
+  margin: .5rem 0;
+  border: 1px solid #eeeeee;
+}
+
 .token {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   color: white;
   background-color: $secondary-color;
   border-radius: 2px;
   text-align: center;
-  line-height: 32px;
+  line-height: 28px;
   font-size: 21px;
   text-shadow: 1px 1px 1px rgba(0,0,0,.24);
   z-index: 1;
@@ -18,12 +25,6 @@
 #alert-container{
   margin: .5rem 0;
 }
-#game-section{
-  background: $white;
-  margin: .5rem 0;
-  border: 1px solid #eeeeee;
-}
-
 
 #game-play-section{
   #board-wrapper{
@@ -32,7 +33,7 @@
   }
   #board {
     list-style: none;
-    width: 540px;
+    width: 480px;
     padding: 0px;
     margin: 0 auto;
     &::after{
@@ -45,7 +46,7 @@
   #player-hand {
     clear: both;
     text-align: center;
-    height: 32px;
+    height: 28px;
     margin: .5rem auto .5rem;
     width: 100%;
     // background: $light-yellow;
@@ -54,8 +55,8 @@
       display: inline-block;
       position: relative;
       margin: 0 2px;
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
     }
   }
 
@@ -86,10 +87,10 @@
   float: left;
   border-radius: 2px;
   margin: 2px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   text-align: center;
-  line-height: 32px;
+  line-height: 28px;
   position: relative;
 }
 
@@ -98,8 +99,8 @@
 }
 
 .cell::after {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   position: absolute;
   left: 0;
   top: 0;
