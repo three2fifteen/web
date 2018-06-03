@@ -2,6 +2,7 @@ loader.executeModule('gamePageModule',
 'config', 'app', 'B', 'utils', 'Game', 'Socket',
 (config, app, B, utils, Game, Socket) => {
 	const gameId = B.$id('current_game_id').dataset.value;
+	let playButton, skipTurn, playerHand, bin;
 
 	const getLiNode = (node) => {
 		while (node && node.nodeName != 'LI') {
@@ -11,8 +12,7 @@ loader.executeModule('gamePageModule',
 	};
 
 	const _postMove = (valid, message, enableConfirm) => {
-		let cpNode = B.$id('confirm-play'),
-			alertNode = B.$id('alert-container');
+		let alertNode = B.$id('alert-container');
 		alertNode.innerHTML = message;
 		if (message) {
 			B.removeClass(alertNode, 'hidden');
@@ -31,10 +31,10 @@ loader.executeModule('gamePageModule',
 		}
 
 		if (enableConfirm) {
-			cpNode.removeAttribute('disabled');
+			playButton.removeAttribute('disabled');
 		}
 		else {
-			cpNode.setAttribute('disabled', 'disabled');
+			playButton.setAttribute('disabled', 'disabled');
 		}
 	};
 
@@ -90,15 +90,14 @@ loader.executeModule('gamePageModule',
 		const move = callback(token, destination);
 		_resultMove(move, true);
 		B.removeClass(_hoveredCell, 'hovered');
-		if (!B.$id('token-bin').children.length) {
-			B.addClass(B.$id('skip-turn'), 'hidden');
-			B.removeClass(B.$id('confirm-play'), 'hidden');
+		if (!bin.children.length) {
+			B.addClass(skipTurnButton, 'hidden');
+			B.removeClass(playButton, 'hidden');
 		}
 	};
 
 	const _dropTokenHand = (e) => {
-		const li = B.$id('player-hand');
-		_dropToken(e, li, true, (token, li) => {
+		_dropToken(e, playerHand, true, (token, li) => {
 			const move = Game.removeToken(
 				gameId,
 				token.id
@@ -125,11 +124,11 @@ loader.executeModule('gamePageModule',
 	};
 
 	const _dropTokenBin = (e) => {
-		_dropToken(e, B.$id('token-bin'), false, (token, li) => {
+		_dropToken(e, bin, false, (token, li) => {
 			Game.skip(gameId, parseInt(token.dataset.value), true).then((score) => {
 				_postMove(true, score, true);
-				B.addClass(B.$id('confirm-play'), 'hidden');
-				B.removeClass(B.$id('skip-turn'), 'hidden');
+				B.addClass(playButton, 'hidden');
+				B.removeClass(skipTurnButton, 'hidden');
 			}).catch((message) => {
 				_postMove(false, message, true);
 			});
@@ -170,6 +169,10 @@ loader.executeModule('gamePageModule',
 			);
 
 			if (!module.data.game.date_finished) {
+				playButton = B.$id('confirm-play');
+				skipTurnButton = B.$id('skip-turn');
+				playerHand = B.$id('player-hand');
+				bin = B.$id('token-bin');
 				_setEvents();
 			}
 		});
@@ -182,22 +185,22 @@ loader.executeModule('gamePageModule',
 				e.dataTransfer.setData('token-id', token.id);
 			});
 		});
-		B.$id('player-hand').addEventListener('dragover', _tokenOverHand);
-		B.$id('player-hand').addEventListener('drop', _dropTokenHand);
-		B.$id('token-bin').addEventListener('dragover', _tokenOverBin);
-		B.$id('token-bin').addEventListener('drop', _dropTokenBin);
+		playerHand.addEventListener('dragover', _tokenOverHand);
+		playerHand.addEventListener('drop', _dropTokenHand);
+		bin.addEventListener('dragover', _tokenOverBin);
+		bin.addEventListener('drop', _dropTokenBin);
 		document.querySelectorAll('#board li').forEach((place) => {
 			place.addEventListener('dragover', _tokenOverBoard, false);
 			place.addEventListener('drop', _dropTokenBoard, false);
 		});
-		B.$id('confirm-play').addEventListener('click', (e) => {
+		playButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			const play = Game.play(gameId);
 			_resultMove(play, false);
 		});
-		B.$id('skip-turn').addEventListener('click', (e) => {
+		skipTurnButton.addEventListener('click', (e) => {
 			e.preventDefault();
-			let discarded_tokens = B.$id('token-bin').children;
+			let discarded_tokens = bin.children;
 			if (!discarded_tokens || !B.hasClass(discarded_tokens[0], 'token')) {
 				return;
 			}
