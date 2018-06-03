@@ -3,6 +3,7 @@ loader.executeModule('gamePageModule',
 (config, app, B, utils, Game, Socket) => {
 	const gameId = B.$id('current_game_id').dataset.value;
 	let playButton, skipTurn, playerHand, bin;
+	let _hoveredCell = null;
 
 	const getLiNode = (node) => {
 		while (node && node.nodeName != 'LI') {
@@ -38,7 +39,6 @@ loader.executeModule('gamePageModule',
 		}
 	};
 
-	let _hoveredCell = null;
 	const _tokenOverHand = (e) => {
 		e.preventDefault();
 	}
