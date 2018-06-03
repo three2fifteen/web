@@ -4,9 +4,23 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-lg-6">
-				<h3>Games</h3>
+				<h2>Games</h2>
 				<a class="btn btn-primary btn-full-width" href="/game/create"> Start new game </a>
-				<div id="list-games"></div>
+				<div id="turn-games-wrapper">
+					<h3>Your turn</h3>
+					<ul id="turn-games">
+					</ul>
+				</div>
+				<div id="active-games-wrapper">
+					<h3>Active games</h3>
+					<ul id="active-games">
+					</ul>
+				</div>
+				<div id="pending-games-wrapper">
+					<h3>Pending games</h3>
+					<ul id="pending-games">
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
