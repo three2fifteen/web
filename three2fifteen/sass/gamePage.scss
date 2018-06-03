@@ -1,18 +1,11 @@
-#game-section{
-  background: $white;
-  // display: grid;
-  margin: .5rem 0;
-  border: 1px solid #eeeeee;
-}
-
 .token {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   color: white;
   background-color: $secondary-color;
   border-radius: 2px;
   text-align: center;
-  line-height: 28px;
+  line-height: 32px;
   font-size: 21px;
   text-shadow: 1px 1px 1px rgba(0,0,0,.24);
   z-index: 1;
@@ -22,63 +15,183 @@
   cursor: -webkit-grab;
 }
 
+
+#game-section{
+  background: $white;
+  display: grid;
+  height: 100%;
+  border: 1px solid #eeeeee;
+  grid-template-rows: auto 136px;
+  grid-template-columns: 60% 40%;
+
+  #game-play-area{
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    overflow: scroll;
+    grid-column-start: 1;
+    grid-row-start: 1;
+
+    #board-wrapper{
+      width: 100%;
+
+      #board {
+        list-style: none;
+        width: 540px;
+        padding: 0px;
+        margin: 0 auto;
+        &::after{
+          content: '';
+          clear: both;
+          display: block;
+        }
+      }
+    }
+    
+  }
+
+  #game-play-section{
+    grid-column-start: 1;
+    grid-row-start: 2;
+    .game-info{
+      height: 2rem;
+      align-items: center;
+      display: flex;
+      justify-content: space-around;
+    }
+    #player-hand {
+      clear: both;
+      text-align: center;
+      height: 32px;
+      margin: .5rem auto .5rem;
+      width: 100%;
+      .token {
+        display: inline-block;
+        position: relative;
+        margin: 0 2px;
+        width: 32px;
+        height: 32px;
+      }
+    }
+    #confirm-button-wrapper{
+      padding: 1rem;
+      margin: 0;
+      background: #fafafa;
+      border-top: 1px solid #eeeeee;
+      #confirm-play{
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  #player-scores{
+    padding: 1rem;
+    border-left: 1px solid #eeeeee;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    h3{
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .score{
+      &#score-player-1{
+        border-left: 4px solid $primary-color;
+      }
+
+      &#score-player-2{
+        border-left: 4px solid $secondary-color;
+      }
+
+      &#score-player-3{
+        border-left: 4px solid $yellow;
+      }
+
+      &#score-player-4{
+        border-left: 4px solid $purple;
+      }
+
+      background-color: $light-gray;
+      margin: 8px 0;
+      padding: 8px;
+      display: flex;
+      align-items:center;
+      justify-content: space-between;
+
+      .player-info{
+        display: flex;
+        align-items:center;
+        .player-turn{
+          color: $blue;
+        }
+      }
+
+      .player-avatar{
+        width: 64px;
+        height: 64px;
+        margin: 0 8px;
+        background-size: contain;
+      }
+
+      .player-score{
+        font-weight: 600;
+      }
+
+      #player-1-image{
+        background-image: url('../images/Avatar 1.png');
+      }
+      #player-2-image{
+        background-image: url('../images/Avatar 2.png');
+      }
+      #player-3-image{
+        background-image: url('../images/Avatar 3.png');
+      }
+      #player-4-image{
+        background-image: url('../images/Avatar 4.png');
+      }
+    }
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #alert-container{
   margin: .5rem 0;
 }
 
-#game-play-section{
-  #board-wrapper{
-    overflow: scroll;
-    margin: 1rem auto 0px;
-  }
-  #board {
-    list-style: none;
-    width: 480px;
-    padding: 0px;
-    margin: 0 auto;
-    &::after{
-      content: '';
-      clear: both;
-      display: block;
-    }
-  }
 
-  #player-hand {
-    clear: both;
-    text-align: center;
-    height: 28px;
-    margin: .5rem auto .5rem;
-    width: 100%;
-    // background: $light-yellow;
-    // border: 1px black solid;
-    .token {
-      display: inline-block;
-      position: relative;
-      margin: 0 2px;
-      width: 28px;
-      height: 28px;
-    }
-  }
 
-  .game-info{
-    height: 2rem;
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
-  }
-  #confirm-button-wrapper{
-    padding: 1rem;
-    margin: 0 -15px;
-    background: #fafafa;
-    border-top: 1px solid #eeeeee;
-    #confirm-play{
-      width: 100%;
-      display: block;
-      margin: 0 auto;
-    }
-  }
 
-}
+
+
+
+
+
+
+
 
 
 
@@ -87,10 +200,10 @@
   float: left;
   border-radius: 2px;
   margin: 2px;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   text-align: center;
-  line-height: 28px;
+  line-height: 32px;
   position: relative;
 }
 
@@ -99,8 +212,8 @@
 }
 
 .cell::after {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   position: absolute;
   left: 0;
   top: 0;
@@ -188,6 +301,7 @@
 
 
 #player-scores-mobile{
+  visible: hidden;
   justify-content: space-between;
   padding-top: .5rem;
   padding-bottom: .5rem;
@@ -218,70 +332,7 @@
   }
 }
 
-#player-scores{
-  border-left: 1px solid #eeeeee;
 
-  h3{
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  .score{
-    &#score-player-1{
-      border-left: 4px solid $primary-color;
-    }
-
-    &#score-player-2{
-      border-left: 4px solid $secondary-color;
-    }
-
-    &#score-player-3{
-      border-left: 4px solid $yellow;
-    }
-
-    &#score-player-4{
-      border-left: 4px solid $purple;
-    }
-
-    background-color: $light-gray;
-    margin: 8px 0;
-    padding: 8px;
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-
-    .player-info{
-      display: flex;
-      align-items:center;
-      .player-turn{
-        color: $blue;
-      }
-    }
-
-    .player-avatar{
-      width: 64px;
-      height: 64px;
-      margin: 0 8px;
-      background-size: contain;
-    }
-
-    .player-score{
-      font-weight: 600;
-    }
-
-    #player-1-image{
-      background-image: url('../images/Avatar 1.png');
-    }
-    #player-2-image{
-      background-image: url('../images/Avatar 2.png');
-    }
-    #player-3-image{
-      background-image: url('../images/Avatar 3.png');
-    }
-    #player-4-image{
-      background-image: url('../images/Avatar 4.png');
-    }
-  }
-}
 
 
 
