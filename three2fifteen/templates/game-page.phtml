@@ -10,15 +10,14 @@
 	</div>
 
 	<script type="template" id="game-ongoing">
-		<div id="player-scores-mobile" class="col-lg-4 d-lg-none d-flex flex-row">
-			[[each game.players as player on player_score]]
-		</div>
-		<div id="game-play-section" class="col-lg-8">
+		<div id="game-play-area">
 			<div id="board-wrapper">
 				<ul id="board">
 					[[each board as cell on board_cell]]
 				</ul>
 			</div>
+		</div>
+		<div id="game-play-section" class="">
 			<div class="game-info">
 				Tokens remaining: [[game.size_bag]]
 			</div>
@@ -29,7 +28,7 @@
 				<button id="confirm-play" class="btn btn-primary btn-full-width" disabled>Confirm</button>
 			</div>
 		</div>
-		<div id="player-scores" class="col-lg-4 d-none d-lg-block">
+		<div id="player-scores" class="">
 			<h3>Scores:</h3>
 			[[each game.players as player on player_score]]
 		</div>
