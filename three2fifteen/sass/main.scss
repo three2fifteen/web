@@ -19,6 +19,13 @@ html{
 body {
   background: $background-color;
 	font: $body;
+	height: 100vh;
+}
+
+.container{
+	height: -webkit-calc(100% - 64px);
+	height:    -moz-calc(100% - 64px);
+	height:         calc(100% - 64px);
 }
 
 h1{
