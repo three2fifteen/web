@@ -3,6 +3,7 @@ loader.executeModule('gamePageModule',
 (config, app, B, utils, Game, Socket) => {
 	const gameId = B.$id('current_game_id').dataset.value;
 	let playButton, skipTurn, playerHand, bin;
+	let _moveSource, _targetedAction;
 	let _hoveredCell = null;
 
 	const getLiNode = (node) => {
@@ -12,7 +13,7 @@ loader.executeModule('gamePageModule',
 		return node;
 	};
 
-	const _postMove = (valid, message, enableConfirm) => {
+	const _postMove = (valid, message, enableConfirm, _targetedAction) => {
 		let alertNode = B.$id('alert-container');
 		alertNode.innerHTML = message;
 		if (message) {
@@ -32,10 +33,10 @@ loader.executeModule('gamePageModule',
 		}
 
 		if (enableConfirm) {
-			playButton.removeAttribute('disabled');
+			_enableAction(_targetedAction);
 		}
 		else {
-			playButton.setAttribute('disabled', 'disabled');
+			_disableAction(_targetedAction);
 		}
 	};
 
@@ -63,76 +64,80 @@ loader.executeModule('gamePageModule',
 		);
 	};
 
+	const _disableAction = (button) => {
+		button.setAttribute('disabled', 'disabled');
+		B.addClass(button, 'hidden');
+	};
+
+	const _enableAction = (button) => {
+		button.removeAttribute('disabled');
+		B.removeClass(button, 'hidden');
+	};
+
 	const _resultMove = (move, dryRun) => {
 		if (!move) {
 			return;
 		}
 		move.then((score) => {
-			_postMove(true, score, dryRun);
+			_postMove(true, score, dryRun, _targetedAction);
 			if (!dryRun) {
 				// fetch data back
 				_refresh();
 				Socket.message({'type': 'play'});
+				_targetedAction = null;
+				_moveSource = null;
 			}
 		}).catch((message) => {
-			_postMove(false, message, false);
+			_postMove(false, message, false, _targetedAction);
 		});
 	};
 
-	const _dropToken = (e, destination, multiple_children, callback) => {
+	const _dropToken = (e, destination) => {
 		e.preventDefault();
 		const token = B.$id(e.dataTransfer.getData('token-id'));
+		destination = destination || e.target;
+		let move;
 		// Prevent from dropping more than one token in the same space
-		if (!multiple_children && destination.children.length) {
+		if (destination != playerHand && destination.children.length) {
 			return;
 		}
+
 		destination.appendChild(token);
-		const move = callback(token, destination);
-		_resultMove(move, true);
-		B.removeClass(_hoveredCell, 'hovered');
-		if (!bin.children.length) {
-			B.addClass(skipTurnButton, 'hidden');
-			B.removeClass(playButton, 'hidden');
-		}
-	};
-
-	const _dropTokenHand = (e) => {
-		_dropToken(e, playerHand, true, (token, li) => {
-			const move = Game.removeToken(
-				gameId,
-				token.id
-			);
-			if (!move) {
-				_postMove(true, '', false);
+		if (!(_moveSource == destination && [bin, playerHand].indexOf(destination) != -1)) {
+			if (_moveSource == bin) {
+				_disableAction(skipTurnButton);
 			}
-			return move;
+			if (B.hasClass(destination, 'cell')) {
+				move = Game.placeToken(
+					gameId,
+					token.id,
+					parseInt(destination.dataset.x),
+					parseInt(destination.dataset.y),
+					parseInt(token.dataset.value)
+				);
+			}
+			else if (destination == bin) {
+				if (B.hasClass(_moveSource, 'cell')) {
+					Game.removeToken(gameId, token.id).catch((message) => {
+						_disableAction(playButton);
+					});
+				}
+				move = Game.skip(gameId, parseInt(token.dataset.value), true);
+			}
+			else if (destination == playerHand) {
+				move = Game.removeToken(gameId, token.id);
+			}
+
+			if (destination == bin) {
+				_targetedAction = skipTurnButton;
+			}
+			else {
+				_targetedAction = playButton;
+			}
 		}
-		);
-	};
+		_resultMove(move, true);
 
-	const _dropTokenBoard = (e) => {
-		const li = getLiNode(e.target);
-		_dropToken(e, li, false, (token, li) => {
-			return Game.placeToken(
-				gameId,
-				token.id,
-				parseInt(li.dataset.x),
-				parseInt(li.dataset.y),
-				parseInt(token.dataset.value)
-			);
-		});
-	};
-
-	const _dropTokenBin = (e) => {
-		_dropToken(e, bin, false, (token, li) => {
-			Game.skip(gameId, parseInt(token.dataset.value), true).then((score) => {
-				_postMove(true, score, true);
-				B.addClass(playButton, 'hidden');
-				B.removeClass(skipTurnButton, 'hidden');
-			}).catch((message) => {
-				_postMove(false, message, true);
-			});
-		});
+		B.removeClass(_hoveredCell, 'hovered');
 	};
 
 	const _prepareGame = (module) => {
@@ -183,19 +188,20 @@ loader.executeModule('gamePageModule',
 		document.querySelectorAll('#player-hand .token').forEach((token) => {
 			token.addEventListener('dragstart', (e) => {
 				e.dataTransfer.setData('token-id', token.id);
+				_moveSource = token.parentNode;
 			});
 		});
 		playerHand.addEventListener('dragover', _tokenOverHand);
-		playerHand.addEventListener('drop', _dropTokenHand);
+		playerHand.addEventListener('drop', (e) => {_dropToken(e, playerHand);});
 		bin.addEventListener('dragover', _tokenOverBin);
-		bin.addEventListener('drop', _dropTokenBin);
+		bin.addEventListener('drop', (e) => {_dropToken(e, bin);});
 		document.querySelectorAll('#board li').forEach((place) => {
-			place.addEventListener('dragover', _tokenOverBoard, false);
-			place.addEventListener('drop', _dropTokenBoard, false);
+			place.addEventListener('dragover', _tokenOverBoard);
+			place.addEventListener('drop', _dropToken);
 		});
 		playButton.addEventListener('click', (e) => {
 			e.preventDefault();
-			const play = Game.play(gameId);
+			const play = Game.play(gameId, false);
 			_resultMove(play, false);
 		});
 		skipTurnButton.addEventListener('click', (e) => {

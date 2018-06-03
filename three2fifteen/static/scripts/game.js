@@ -111,8 +111,8 @@ loader.addModule('Game',
 			delete _currentPlay[tokenId];
 			return Object.keys(_currentPlay).length && _play(gameId, false, true);
 		},
-		play: (gameId) => {
-			return _play(gameId, false, false);
+		play: (gameId, dryRun) => {
+			return _play(gameId, false, dryRun);
 		},
 		skip: (gameId, tokenToDiscard, dryRun) => {
 			return _play(
