@@ -17,12 +17,13 @@
 
 
 #game-section{
+  margin: none;
   background: $white;
   display: grid;
   height: 100%;
   border: 1px solid #eeeeee;
-  grid-template-rows: auto 136px;
-  grid-template-columns: 60% 40%;
+  grid-template-rows: 96px auto 148px;;
+  grid-template-columns: 100%;
 
   #game-play-area{
     display: flex;
@@ -30,9 +31,10 @@
     margin: 1rem;
     overflow: scroll;
     grid-column-start: 1;
-    grid-row-start: 1;
+    grid-row-start: 2;
 
     #board-wrapper{
+      margin: auto;
       width: 100%;
 
       #board {
@@ -47,12 +49,12 @@
         }
       }
     }
-    
+
   }
 
   #game-play-section{
     grid-column-start: 1;
-    grid-row-start: 2;
+    grid-row-start: 3;
     .game-info{
       height: 2rem;
       align-items: center;
@@ -87,113 +89,51 @@
   }
 
   #player-scores{
+    display: flex;
+    align-items: center;
     padding: 1rem;
-    border-left: 1px solid #eeeeee;
-    grid-column-start: 2;
+    border-left: none;
+    grid-column-start: 1;
     grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-end: 2;
 
     h3{
-      margin-top: 16px;
-      margin-bottom: 16px;
+      display: none;
     }
+    justify-content: space-between;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #eeeeee;
     .score{
-      &#score-player-1{
-        border-left: 4px solid $primary-color;
-      }
-
-      &#score-player-2{
-        border-left: 4px solid $secondary-color;
-      }
-
-      &#score-player-3{
-        border-left: 4px solid $yellow;
-      }
-
-      &#score-player-4{
-        border-left: 4px solid $purple;
-      }
-
-      background-color: $light-gray;
-      margin: 8px 0;
-      padding: 8px;
+      width: 45%;
+      height: 2rem;
+      font: $subhead;
       display: flex;
-      align-items:center;
-      justify-content: space-between;
-
+      align-items: center;
+      justify-content:space-between;
       .player-info{
         display: flex;
-        align-items:center;
+        font-size: $header;
         .player-turn{
-          color: $blue;
+          color: $yellow;
+        }
+        .player-avatar{
+          display: none;
+          display: inline-block;
         }
       }
-
-      .player-avatar{
-        width: 64px;
-        height: 64px;
-        margin: 0 8px;
-        background-size: contain;
-      }
-
       .player-score{
         font-weight: 600;
       }
 
-      #player-1-image{
-        background-image: url('../images/Avatar 1.png');
-      }
-      #player-2-image{
-        background-image: url('../images/Avatar 2.png');
-      }
-      #player-3-image{
-        background-image: url('../images/Avatar 3.png');
-      }
-      #player-4-image{
-        background-image: url('../images/Avatar 4.png');
-      }
+
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #alert-container{
   margin: .5rem 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .cell {
   background-color: $light-gray;
@@ -334,6 +274,92 @@
 
 
 
+
+@include media-breakpoint-between(md,xl){
+  #game-section{
+    margin-top: 16px;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto 140px;
+    #player-scores{
+      border-left: 1px solid #eeeeee;
+      grid-column-start: 2;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      h3{
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+      .score{
+        background-color: $light-gray;
+        margin: 8px 0;
+        padding: 8px;
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+
+        width: 100%;
+        height: auto;
+        font: $subhead
+
+        &#score-player-1{
+          border-left: 4px solid $primary-color;
+        }
+
+        &#score-player-2{
+          border-left: 4px solid $secondary-color;
+        }
+
+        &#score-player-3{
+          border-left: 4px solid $yellow;
+        }
+
+        &#score-player-4{
+          border-left: 4px solid $purple;
+        }
+
+        .player-info{
+          display: flex;
+          align-items:center;
+          .player-turn{
+            color: $blue;
+          }
+        }
+
+        .player-avatar{
+          width: 64px;
+          height: 64px;
+          margin: 0 8px;
+          background-size: contain;
+        }
+
+        .player-score{
+          font-weight: 600;
+        }
+
+        #player-1-image{
+          background-image: url('../images/Avatar 1.png');
+        }
+        #player-2-image{
+          background-image: url('../images/Avatar 2.png');
+        }
+        #player-3-image{
+          background-image: url('../images/Avatar 3.png');
+        }
+        #player-4-image{
+          background-image: url('../images/Avatar 4.png');
+        }
+      }
+    }
+    #game-play-area{
+      grid-column-start: 1;
+      grid-row-start: 1;
+    }
+    #game-play-section{
+      grid-column-start: 1;
+      grid-row-start: 2;
+    }
+  }
+}
 
 
 
