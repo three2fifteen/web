@@ -37,7 +37,7 @@ loader.addModule('Game',
 				let player = game.players[user_id];
 				if (player.points > maxPoints) {
 					maxPoints = player.points;
-					winner = player.id_user;
+					winner = player.id_player;
 				}
 			}
 
@@ -51,7 +51,7 @@ loader.addModule('Game',
 			const _addPlayersGame = (game) => {
 				for (let user_id in game.players) {
 					let player = game.players[user_id];
-					ids.add(player.id_user);
+					ids.add(player.id_player);
 				}
 			};
 
