@@ -69,10 +69,15 @@ loader.addModule('Game',
 				}
 			}
 			return new Promise((resolve, reject) => {
+				const idsStr = [...ids].join();
+				if (idsStr == "") {
+					resolve();
+					return;
+				}
 				request.get(
 					utils.format(
 						config.api_host + config.api_get_player_names,
-						[[...ids].join()]
+						[idsStr]
 					),
 					auth.getHeader(),
 					(statusCode, body) => {
