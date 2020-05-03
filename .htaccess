@@ -1,0 +1,22 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/rogh0117/projects/three2fifteen/web"
+PassengerBaseURI "/"
+PassengerPython "/home/rogh0117/virtualenv/projects/three2fifteen/web/3.7/bin/python3.7"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv API_HOST https://api.three2fifteen.rogh0117.odns.fr
+SetEnv API_LOGIN /auth/login
+SetEnv API_SIGNUP /auth/sign-up
+SetEnv API_GET_GAME /game/%s
+SetEnv API_GET_GAMES /games
+SetEnv API_CREATE_GAME /game
+SetEnv API_JOIN_GAME /game/%s/join
+SetEnv API_GET_BOARD /board
+SetEnv API_GET_GAME_CONTENT /game/%s/content
+SetEnv API_GET_HAND /game/%s/hand
+SetEnv API_TURN_CHECK /game/%s/turn/check
+SetEnv API_TURN /game/%s/turn
+SetEnv API_GET_PLAYER_NAMES /player/names/%s
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
