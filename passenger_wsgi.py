@@ -1,12 +1,15 @@
-#!/home/rogh0117/virtualenv/projects/three2fifteen/web/3.7/bin/python3
-# EASY-INSTALL-ENTRY-SCRIPT: 'three2fifteen-web','console_scripts','three2fifteen-web'
-__requires__ = 'three2fifteen-web'
-import re
+"""import os
 import sys
-from pkg_resources import load_entry_point
 
-if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
-    sys.exit(
-        load_entry_point('three2fifteen-web', 'console_scripts', 'three2fifteen-web')()
-    )
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+
+def application(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    message = 'It works!\n'
+    version = 'Python %s\n' % sys.version.split()[0]
+    response = '\n'.join([message, version])
+    return [response.encode()]
+"""
+from app import application
