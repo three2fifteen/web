@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, request, render_template, Response, current_app
 from three2fifteen.controller.config import ConfigController
 
@@ -29,7 +30,7 @@ def rules():
 
 @bp.route('/config.js')
 def config():
-    controller = ConfigController(current_app.config)
+    controller = ConfigController()
     return Response(render_template('config.js', data=controller.get()),
                     mimetype='application/javascript')
 
